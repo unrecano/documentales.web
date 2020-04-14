@@ -1,0 +1,25 @@
+version: '3'
+services:
+  kiranadb:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: kirana_db
+  kirana:
+    build:
+      context: ${PWD}/kirana
+      dockerfile: ../docker/dev
+    volumes:
+      - ${PWD}/kirana:/code
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_HOST=kiranadb
+      - DATABASE_POST=5432
+      - DATABASE_NAME=kirana_db
+      - DATABASE_USER=postgres
+      - DATABASE_PASS=secret
+    depends_on:
+      - kiranadb
