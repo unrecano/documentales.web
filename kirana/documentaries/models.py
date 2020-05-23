@@ -5,13 +5,13 @@ from django.db import models
 class Tag(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           editable=False)
-    value = models.CharField(max_length=100)
+    value = models.CharField(max_length=100, unique=True)
 
 class Documentary(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           editable=False)
     title = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True)
     description = models.TextField()
     year = models.CharField(max_length=4, null=True)
     duration = models.PositiveIntegerField(null=True)
