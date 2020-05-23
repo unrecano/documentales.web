@@ -13,11 +13,13 @@ class Documentary(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
     description = models.TextField()
-    year = models.CharField(max_length=4)
+    year = models.CharField(max_length=4, null=True)
     duration = models.PositiveIntegerField(null=True)
     url = models.URLField()
     sites = ArrayField(models.URLField())
     tags = models.ManyToManyField(Tag, related_name="documentaries")
+    created = models.DateField(auto_now_add=True)
+    updated = models.DateField(auto_now=True)
 
     class Meta:
         verbose_name_plural = 'Documentaries'
