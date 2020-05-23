@@ -7,6 +7,9 @@ class Tag(models.Model):
                           editable=False)
     value = models.CharField(max_length=100, unique=True)
 
+    def __str__(self):
+        return self.value
+
 class Documentary(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           editable=False)
