@@ -21,8 +21,8 @@ services:
       - DATABASE_NAME=kirana_db
       - DATABASE_USER=postgres
       - DATABASE_PASS=secret
-      - SCRAPING_DB_HOST=cluster0-knve2.mongodb.net
+      - SCRAPING_DB_HOST=host
       - SCRAPING_DB_USER=admin
-      - SCRAPING_DB_PASS=FcKjKiQRzBLAUGOC
+      - SCRAPING_DB_PASS=pass
     depends_on:
       - kiranadb
