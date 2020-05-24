@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from documentaries.urls import urlpatterns as documentaries_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
+] \
++ documentaries_urls
