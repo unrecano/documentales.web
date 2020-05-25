@@ -3,7 +3,7 @@ import os
 import pymongo
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.text import slugify
-from documentaries.models import Documentary, Tag
+from documentaries.models import Documentary, Tag, Url
 
 # Database credentials.
 DB_USER = os.getenv('SCRAPING_DB_USER')
@@ -39,31 +39,41 @@ class Command(BaseCommand):
             slug = slugify(d.get('title'))
             documentary = Documentary.objects.filter(slug=slug).first()
             if documentary:
-                self.stdout.write(self.style.WARNING(f"{documentary.title} (existe)"))
                 # Si contiene un nuevo sitio se agrega al campo sites y
                 # se agregan las nuevas etiquetas.
-                if not d.get('site') in documentary.sites:
-                    sites = documentary.sites
-                    sites.append(d.get('site'))
-                    documentary.sites = sites
+                params = {
+                    "site": d.get('site'),
+                    "url": d.get('url'),
+                    "documentary": documentary
+                }
+                url = Url.objects.filter(**params).first()
+                if not url:
+                    url = Url.objects.create(**params)
                     # Obtener tags y agregarlas a la instancia Documentary.
                     tags = self._get_or_created_tags(d.get('tags'))
                     documentary.tags.set(tags)
                     documentary.save()
-                    self.stdout.write(self.style.SUCCESS(f"{documentary.title} (actualizado)"))
+                    msg = f"{documentary.title} - {url.url} (actualizado)"
+                    self.stdout.write(self.style.WARNING(msg))
             else:
                 # Crear nuevos tags.
                 tags = self._get_or_created_tags(d.get('tags'))
                 # Crear nuevo documental.
-                params = {
+                documentary_params = {
                     "title": d.get('title'),
                     "slug": slug,
                     "description": d.get('description'),
                     "year": d.get('year') if d.get('year') else None,
-                    "duration": d.get('duration') if d.get('duration') else None,
-                    "url": d.get('url'),
-                    "sites": [d.get('site')],
+                    "duration": d.get('duration') if d.get('duration') else None
                 }
-                created = Documentary.objects.create(**params)
+                created = Documentary.objects.create(**documentary_params)
                 created.tags.set(tags)
-                self.stdout.write(self.style.SUCCESS(f"{created.title} (creado)"))
+
+                url_params = {
+                    "url": d.get('url'),
+                    "site": d.get('site'),
+                    "documentary": created
+                }
+                url = Url.objects.create(**url_params)
+                msg = f"{created.title} - {url.url} (creado)"
+                self.stdout.write(self.style.SUCCESS(msg))
