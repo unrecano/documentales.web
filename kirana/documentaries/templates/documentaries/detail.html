@@ -1,0 +1,35 @@
+{% extends "base/layout.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<h1 class="font-mono text-3xl font-bold text-blue-500">{{ documentary.title }}</h1>
+<div class="py-4">
+  {% if documentary.year %}
+  <p><span class="text-blue-900 font-semibold">Year:</span> <span class="text-base text-gray-700">{{ documentary.year }}</span></p>
+  {% endif %}
+  {% if documentary.duration %}
+  <p><span class="text-blue-900 font-semibold">Duration:</span> <span class="text-base text-gray-700">{{ documentary.duration }}</span></p>
+  {% endif %}
+</div>
+<div class="py-4">
+  {% for tag in documentary.tags.all %}
+  <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mt-2">{{ tag.value }}</span>
+  {% endfor %}
+</div>
+<div class="py-4">
+  {% if documentary.description %}
+  <p class="text-base text-gray-700 text-justify">{{ documentary.description }}</p>
+  {% else %}
+  <p class="text-base text-gray-700 text-justify">There is not a description.</p>
+  {% endif %}
+</div>
+<div class="py-4">
+  <p class="text-blue-900 font-semibold leading-none">Sitios:</p>
+  <ul class="py-4">    
+    {% for url in documentary.urls.all %}
+    <li><p class="text-blue-900 font-semibold text-sm leading-none"><a target="blank" href="{{ url.url }}">{{ url.site }}</a></p></li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

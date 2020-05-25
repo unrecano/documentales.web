@@ -1,13 +1,9 @@
-from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Documentary
 
-def home(request):
-    documentaries = Documentary.objects.all()
-    paginator = Paginator(documentaries, 24)
-    page = request.GET.get('page')
-    elements = paginator.get_page(page)
+def detail(request, slug):
+    documentary = get_object_or_404(Documentary, slug=slug)
     context = {
-        "documentaries": elements
+        "documentary": documentary
     }
-    return render(request, 'documentaries/home.html', context)
+    return render(request, 'documentaries/detail.html', context)
