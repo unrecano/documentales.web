@@ -14,7 +14,7 @@
 </div>
 <div class="py-4">
   {% for tag in documentary.tags.all %}
-  <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mt-2">{{ tag.value }}</span>
+  {% include "base/tag.html" with tag=tag %}
   {% endfor %}
 </div>
 <div class="py-4">
@@ -25,7 +25,7 @@
   {% endif %}
 </div>
 <div class="py-4">
-  <p class="text-blue-900 font-semibold leading-none">Sitios:</p>
+  <p class="text-blue-900 font-semibold leading-none">sitios:</p>
   <ul class="py-4">    
     {% for url in documentary.urls.all %}
     <li><p class="text-blue-900 font-semibold text-sm leading-none"><a target="blank" href="{{ url.url }}">{{ url.site }}</a></p></li>
