@@ -3,5 +3,49 @@
 {% block title %}Inicio{% endblock %}
 
 {% block content %}
-<div>buscar</div>
+<div class="grid grid-cols-1 gap-4 text-center lg:grid-cols-3">
+  <form class="w-full max-w-sm lg:col-start-2 lg:col-span-1" action="{% url 'search' %}">
+    <div class="flex items-center border-b border-b-2 border-blue-500 py-2">
+      <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+             type="text" name="query" placeholder="drugs accidents 911" aria-label="query search" value="{{ words }}">
+      <button class="flex-shring-0 bg-blue-500 hover:bg-blue-700 border-blue-500 hover:border-blue-700 text-sm border-4 text-white py-1 px-2 rounded"
+              type="submit">buscar</button>      
+    </div>
+  </form>
+</div>
+<h1 class="my-8 font-mono text-3xl font-bold text-blue-500">Documentales</h1>
+<div class="my-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
+  {% for documentary in documentaries %}
+  <div class="max-w-xl w-full rounded overflow-hidden shadow-lg">
+    <div class="px-6 py-4">
+      <div class="font-semibold text-blue-800 text-xl mb-2">{{ documentary.title }}</div>
+      {% if documentary.description %}
+      <p class="text-gray-700 text-base">{{ documentary.description|truncatewords:50 }}</p>
+      {% else %}
+      <p class="text-gray-700 text-base">There is not a description.</p>
+      {% endif %}
+    </div>
+    <div class="px-6 py-4">
+      <p class="text-blue-900 font-semibold leading-none">Sitios:</p>
+      <ul>    
+        {% for url in documentary.urls.all %}
+        <li><p class="text-blue-900 font-semibold text-sm leading-none"><a target="blank" href="{{ url.url }}">{{ url.site }}</a></p></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="px-6 py-4">
+      {% for tag in documentary.tags.all %}
+      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mt-2">{{ tag.value }}</span>
+      {% endfor %}
+    </div>
+  </div>
+  {% empty %}
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 text-center">
+    <p class="text-gray-700 font-bold text-lg">No hay resultados.</p>
+  </div>
+  {% endfor %}
+</div>
+{% if documentaries|length > 0 %}
+{% include "base/paginator.html" with paginator=documentaries %}
+{% endif %}
 {% endblock %}

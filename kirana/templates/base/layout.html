@@ -19,36 +19,33 @@
   </div>
   <div id="menu" class="hidden w-full block flex-grow lg:flex lg:items-center lg:w-auto">
     <div class="text-sm lg:flex-grow">
-      <a id="menu-home" href="{% url 'home' %}" class="block mt-4 lg:inline-block lg:mt-0 text-blue-200 hover:text-white mr-4">
-        Inicio
-      </a>
       <a id="menu-search" href="{% url 'search' %}" class="block mt-4 lg:inline-block lg:mt-0 text-blue-200 hover:text-white mr-4">
         Buscar
       </a>
+      <a id="menu-about" href="{% url 'home' %}" class="block mt-4 lg:inline-block lg:mt-0 text-blue-200 hover:text-white mr-4">
+        Acerca de
+      </a>
     </div>
-    <!-- <div>
-      <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-blue-500 hover:bg-white mt-4 lg:mt-0">Download</a>
-    </div> -->
   </div>
 </nav>
-<div class="container mx-auto mt-8">
+<div class="container mx-4 mt-8 lg:mx-auto">
 {% block content %}{% endblock %}
 </div>
 <script type="text/javascript">
   current_path = "{{ request.path }}"
   switch (current_path) {
-    case "/search":
+    case "/":
       document.getElementById("menu-search").classList.add("text-white");
       document.getElementById("menu-search").classList.add("font-semibold");
       document.getElementById("menu-search").classList.remove("text-blue-200");
-      document.getElementById("menu-home").classList.remove("text-white");
-      document.getElementById("menu-home").classList.remove("font-semibold");
-      document.getElementById("menu-home").classList.add("text-blue-200");
+      document.getElementById("menu-about").classList.remove("text-white");
+      document.getElementById("menu-about").classList.remove("font-semibold");
+      document.getElementById("menu-about").classList.add("text-blue-200");
       break;
-    case "/":
-      document.getElementById("menu-home").classList.add("text-white");
-      document.getElementById("menu-home").classList.add("font-semibold");
-      document.getElementById("menu-home").classList.remove("text-blue-200");
+    case "/about":
+      document.getElementById("menu-about").classList.add("text-white");
+      document.getElementById("menu-about").classList.add("font-semibold");
+      document.getElementById("menu-about").classList.remove("text-blue-200");
       document.getElementById("menu-search").classList.remove("text-white");
       document.getElementById("menu-search").classList.remove("font-semibold");
       document.getElementById("menu-search").classList.add("text-blue-200");

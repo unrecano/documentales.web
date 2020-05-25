@@ -1,0 +1,17 @@
+<div class="grid grid-cols-1 gap-4 text-center my-8">
+  <div>
+    {% if paginator.has_previous %}
+    <span class="text-blue-500 font-bold">
+      <a href="{% url 'home' %}?page={{paginator.previous_page_number}}">&#10094; </a>
+    </span>
+    {% endif %}
+    <span class="text-gray-700 font-bold">
+      {{ paginator.number }} de {{ paginator.paginator.num_pages }}
+    </span>
+    {% if paginator.has_next %}
+    <span class="text-blue-500 font-bold">
+      <a href="{% url 'home' %}?page={{paginator.next_page_number}}"> &#10095;</a>
+    </span>
+    {% endif %}
+  </div>
+</div>
