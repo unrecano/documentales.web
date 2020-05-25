@@ -6,7 +6,7 @@ class TagAdmin(admin.ModelAdmin):
     ordering = ["value"]
 
 class DocumentaryAdmin(admin.ModelAdmin):
-    list_display = ["title", "url", "year", "duration"]
+    list_display = ["title", "year", "duration"]
     search_fields = ["title", "description"]
     list_filter = ["year"]
     ordering = ['created']

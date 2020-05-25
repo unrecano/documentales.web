@@ -18,8 +18,6 @@ class Documentary(models.Model):
     description = models.TextField()
     year = models.CharField(max_length=4, null=True)
     duration = models.PositiveIntegerField(null=True)
-    url = models.URLField()
-    sites = ArrayField(models.URLField())
     tags = models.ManyToManyField(Tag, related_name="documentaries")
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
@@ -29,3 +27,12 @@ class Documentary(models.Model):
 
     def __str__(self):
         return self.title
+
+class Url(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4,
+                          editable=False)
+    site = models.CharField(max_length=255)
+    url = models.URLField()
+    documentary = models.ForeignKey(Documentary, on_delete=models.CASCADE, related_name="urls")
+    created = models.DateField(auto_now_add=True)
+    updated = models.DateField(auto_now=True)    
