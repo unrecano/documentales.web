@@ -36,3 +36,6 @@ class Url(models.Model):
     documentary = models.ForeignKey(Documentary, on_delete=models.CASCADE, related_name="urls")
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)    
+
+    def __str__(self):
+        return self.url
