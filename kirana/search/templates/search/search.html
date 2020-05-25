@@ -18,7 +18,7 @@
   {% for documentary in documentaries %}
   <div class="max-w-xl w-full rounded overflow-hidden shadow-lg">
     <div class="px-6 py-4">
-      <div class="font-semibold text-blue-800 text-xl mb-2">{{ documentary.title }}</div>
+      <div class="font-semibold text-blue-800 text-xl mb-2"><a href="{% url 'detail' documentary.slug %}">{{ documentary.title }}</a></div>
       {% if documentary.description %}
       <p class="text-gray-700 text-base">{{ documentary.description|truncatewords:50 }}</p>
       {% else %}
@@ -46,6 +46,6 @@
   {% endfor %}
 </div>
 {% if documentaries|length > 0 %}
-{% include "base/paginator.html" with paginator=documentaries %}
+{% include "search/paginator.html" with paginator=documentaries %}
 {% endif %}
 {% endblock %}
