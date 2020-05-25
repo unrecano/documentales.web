@@ -7,7 +7,7 @@
 <body>
 <nav class="flex items-center justify-between flex-wrap bg-blue-500 p-6">
   <div class="flex items-center flex-shrink-0 text-white mr-6">
-    <span class="font-semibold text-xl tracking-tight">Kirana</span>
+    <span class="font-bold text-xl tracking-tight">Kirana</span>
   </div>
   <div class="block lg:hidden">
     <button id="menu-open" type="button" onclick="menu_open(event)" class="flex items-center px-3 py-2 border rounded text-blue-200 border-blue-400 hover:text-white hover:border-white">
@@ -19,10 +19,10 @@
   </div>
   <div id="menu" class="hidden w-full block flex-grow lg:flex lg:items-center lg:w-auto">
     <div class="text-sm lg:flex-grow">
-      <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-blue-200 hover:text-white mr-4">
+      <a id="menu-home" href="{% url 'home' %}" class="block mt-4 lg:inline-block lg:mt-0 text-blue-200 hover:text-white mr-4">
         Inicio
       </a>
-      <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-blue-200 hover:text-white mr-4">
+      <a id="menu-search" href="{% url 'search' %}" class="block mt-4 lg:inline-block lg:mt-0 text-blue-200 hover:text-white mr-4">
         Buscar
       </a>
     </div>
@@ -35,6 +35,26 @@
 {% block content %}{% endblock %}
 </div>
 <script type="text/javascript">
+  current_path = "{{ request.path }}"
+  switch (current_path) {
+    case "/search":
+      document.getElementById("menu-search").classList.add("text-white");
+      document.getElementById("menu-search").classList.add("font-semibold");
+      document.getElementById("menu-search").classList.remove("text-blue-200");
+      document.getElementById("menu-home").classList.remove("text-white");
+      document.getElementById("menu-home").classList.remove("font-semibold");
+      document.getElementById("menu-home").classList.add("text-blue-200");
+      break;
+    case "/":
+      document.getElementById("menu-home").classList.add("text-white");
+      document.getElementById("menu-home").classList.add("font-semibold");
+      document.getElementById("menu-home").classList.remove("text-blue-200");
+      document.getElementById("menu-search").classList.remove("text-white");
+      document.getElementById("menu-search").classList.remove("font-semibold");
+      document.getElementById("menu-search").classList.add("text-blue-200");
+      break;
+  }
+
   list = document.getElementById("menu").classList;
   button_open = document.getElementById("menu-open");
   button_close = document.getElementById("menu-close");

@@ -26,16 +26,16 @@
 <div class="grid grid-cols-1 gap-4 text-center my-8">
   <div>
     {% if documentaries.has_previous %}
-    <span>
-      <a href="{% url 'index' %}?page=1"><</a>
+    <span class="text-blue-500 font-bold">
+      <a href="{% url 'home' %}?page={{documentaries.previous_page_number}}">&#10094; </a>
     </span>
     {% endif %}
     <span class="text-gray-700 font-bold">
       {{ documentaries.number }} de {{ documentaries.paginator.num_pages }}
     </span>
     {% if documentaries.has_next %}
-    <span>
-      <a href="{% url 'index' %}?page={{documentaries.next_page_number}}">></a>
+    <span class="text-blue-500 font-bold">
+      <a href="{% url 'home' %}?page={{documentaries.next_page_number}}"> &#10095;</a>
     </span>
     {% endif %}
   </div>
