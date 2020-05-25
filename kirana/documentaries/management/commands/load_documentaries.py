@@ -48,11 +48,13 @@ class Command(BaseCommand):
                 }
                 url = Url.objects.filter(**params).first()
                 if not url:
+                    # Crear nueva url.
                     url = Url.objects.create(**params)
                     # Obtener tags y agregarlas a la instancia Documentary.
                     tags = self._get_or_created_tags(d.get('tags'))
                     documentary.tags.set(tags)
                     documentary.save()
+                    # Imprime log.
                     msg = f"{documentary.title} - {url.url} (actualizado)"
                     self.stdout.write(self.style.WARNING(msg))
             else:
@@ -68,12 +70,13 @@ class Command(BaseCommand):
                 }
                 created = Documentary.objects.create(**documentary_params)
                 created.tags.set(tags)
-
+                # Crear nueva url.
                 url_params = {
                     "url": d.get('url'),
                     "site": d.get('site'),
                     "documentary": created
                 }
                 url = Url.objects.create(**url_params)
+                # Imprime log.
                 msg = f"{created.title} - {url.url} (creado)"
                 self.stdout.write(self.style.SUCCESS(msg))
