@@ -16,8 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from documentaries.urls import urlpatterns as documentaries_urls
+from search.urls import urlpatterns as search_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ] \
-+ documentaries_urls
++ documentaries_urls \
++ search_urls
