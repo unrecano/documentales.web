@@ -28,9 +28,19 @@
     </div>
   </div>
 </nav>
-<div class="container px-8 lg:mx-4 mt-8 lg:mx-auto">
+<div class="container px-8 mt-8 min-h-screen lg:mx-auto lg:mx-4">
 {% block content %}{% endblock %}
 </div>
+<footer class="bg-blue-500 text-white px-2 pt-0 pb-2 mt-0 font-mono">
+  <div class="container mx-auto py-8">
+    <div class="flex flex-col mb-2 px-4 items-center">
+      <div class="text-base font-medium">Hecho con &#9829; por Kirana</div>
+      <div class="flex text-sm font-light">
+        <a href="https://gitlab.com/unrecano/kirana-web" target="blank">&#183; gitlab</a>
+      </div>
+    </div>
+  </div>
+</footer>
 <script type="text/javascript">
   current_path = "{{ request.path }}"
   switch (current_path) {
