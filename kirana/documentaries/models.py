@@ -25,6 +25,14 @@ class Documentary(models.Model):
     class Meta:
         verbose_name_plural = 'Documentaries'
 
+    @property
+    def sites(self):
+        return self.urls.count()
+
+    @property
+    def views(self):
+        return sum([url.visitors for url in self.urls.all()])
+
     def __str__(self):
         return self.title
 
