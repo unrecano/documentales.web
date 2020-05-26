@@ -7,3 +7,6 @@ def detail(request, slug):
         "documentary": documentary
     }
     return render(request, 'documentaries/detail.html', context)
+
+def about(request):
+    return render(request, 'documentaries/about.html')
