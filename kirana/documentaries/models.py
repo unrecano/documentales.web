@@ -25,6 +25,14 @@ class Documentary(models.Model):
     class Meta:
         verbose_name_plural = 'Documentaries'
 
+    @property
+    def sites(self):
+        return self.urls.count()
+
+    @property
+    def views(self):
+        return sum([url.visitors for url in self.urls.all()])
+
     def __str__(self):
         return self.title
 
@@ -34,6 +42,7 @@ class Url(models.Model):
     site = models.CharField(max_length=255)
     url = models.URLField()
     documentary = models.ForeignKey(Documentary, on_delete=models.CASCADE, related_name="urls")
+    visitors = models.PositiveIntegerField(default=0)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)    
 
