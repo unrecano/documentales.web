@@ -34,6 +34,7 @@ class Url(models.Model):
     site = models.CharField(max_length=255)
     url = models.URLField()
     documentary = models.ForeignKey(Documentary, on_delete=models.CASCADE, related_name="urls")
+    visitors = models.PositiveIntegerField(default=0)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)    
 

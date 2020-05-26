@@ -12,7 +12,7 @@ class DocumentaryAdmin(admin.ModelAdmin):
     ordering = ['created']
 
 class UrlAdmin(admin.ModelAdmin):
-    list_display = ["site", "url"]
+    list_display = ["site", "url", "visitors"]
     search_fields = ["site", "url"]
     list_filter = ["site"]
     ordering = ["created"]

@@ -28,7 +28,7 @@
   <p class="text-blue-900 font-medium leading-none">sitios:</p>
   <ul class="py-4">    
     {% for url in documentary.urls.all %}
-    <li><p class="text-blue-900 font-semibold text-sm leading-none"><a target="blank" href="{{ url.url }}">&#8227; {{ url.site }}</a></p></li>
+    <li><p class="text-blue-900 font-semibold text-sm leading-none"><a target="blank" href="{% url 'redirect' url.id %}">&#8227; {{ url.site }}</a></p></li>
     {% endfor %}
   </ul>
 </div>
