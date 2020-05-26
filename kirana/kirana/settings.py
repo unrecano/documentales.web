@@ -25,7 +25,7 @@ SECRET_KEY = 'e!g%dge-s5@d+v5n2&547u%yqpuzc%x@=e^e1pa#0b1uupa9am'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['kiranaweb.herokuapp.com', 'localhost']
 
 
 # Application definition
