@@ -48,3 +48,13 @@ class Url(models.Model):
 
     def __str__(self):
         return self.url
+
+class Point(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4,
+                          editable=False)
+    comment = models.TextField(null=True)
+    url = models.ForeignKey(Url, on_delete=models.CASCADE, related_name="points")
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.url

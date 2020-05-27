@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Documentary, Tag, Url
+from .models import Documentary, Point, Tag, Url
 
 class TagAdmin(admin.ModelAdmin):
     search_fields = ["value"]
@@ -17,6 +17,12 @@ class UrlAdmin(admin.ModelAdmin):
     list_filter = ["site"]
     ordering = ["created"]
 
+class PointAdmin(admin.ModelAdmin):
+    list_display = ["url", "comment"]
+    search_fields = ["comment"]
+    ordering = ["created"]
+
 admin.site.register(Documentary, DocumentaryAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Url, UrlAdmin)
+admin.site.register(Point, PointAdmin)
