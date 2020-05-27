@@ -10,4 +10,4 @@ Este proyecto se crea por la necesidad de practicar [WEB SCRAPING](https://es.wi
 
 El código del scraping está en [gitlab](https://gitlab.com/unrecano/kirana-scraping) al igual que este [sitio](#).
 
-Visita [kirana](https://kiranaweb.herokuapp.com).
+Visita [Kirana](https://kiranaweb.herokuapp.com).
