@@ -32,4 +32,38 @@
     {% endfor %}
   </ul>
 </div>
+<div class="py-4">
+  <a id="link" class="text-blue-500 font-bold" href="#" onclick="show_form(event)">Reportar enlace roto.</a>
+  <form id="report" class="w-full max-w-lg py-4 hidden" method="POST" action="{% url 'point' %}">
+    {% csrf_token %}
+    <div class="grid grid-cols-1 gap-4">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">Enlace:</label>
+      <select name="url" class="block appareance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+        {% for url in documentary.urls.all %}
+        <option value="{{ url.id }}">{{ url.site }}</option>
+        {% endfor %}
+      </select>
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">Comentario:</label>
+      <textarea name="comment" class="appareance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></textarea>
+      <button class="shadow bg-teal-500 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">enviar
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+  function show_form(event) {
+    event.preventDefault();
+    form_classes = document.getElementById('report').classList;
+    link = document.getElementById('link')
+    if (form_classes.contains('hidden')) {
+      form_classes.remove('hidden');
+      link.text = "Ocultar formulario."
+    } else {
+      form_classes.add('hidden');
+      link.text = "Reportar enlace roto."
+    }
+  }
+</script>
 {% endblock %}
