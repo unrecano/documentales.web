@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Tag, Documentary, Url 
+from .models import Tag, Documentary, Url
 
 class DocumentaryTestCase(TestCase):
     def setUp(self):
