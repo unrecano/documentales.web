@@ -1,0 +1,37 @@
+[
+{
+  "model": "documentaries.tag",
+  "pk": "0008e42d-b67f-4732-a522-80ae797a7f74",
+  "fields": {
+    "value": "uno"
+  }
+},
+{
+  "model": "documentaries.tag",
+  "pk": "0012cc77-c87a-468a-adda-e26443c833be",
+  "fields": {
+    "value": "dos"
+  }
+},
+{
+  "model": "documentaries.tag",
+  "pk": "002f4d00-6841-4f9d-b844-68008d883942",
+  "fields": {
+    "value": "tres"
+  }
+},
+{
+  "model": "documentaries.tag",
+  "pk": "00339825-9d15-4f56-88f0-426a0ff5eb4e",
+  "fields": {
+    "value": "cuatro"
+  }
+},
+{
+  "model": "documentaries.tag",
+  "pk": "0046ef38-4b95-416c-891a-567666e7c842",
+  "fields": {
+    "value": "cinco"
+  }
+}
+]

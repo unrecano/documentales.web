@@ -1,0 +1,82 @@
+[
+{
+  "model": "documentaries.documentary",
+  "pk": "00009ee0-9799-482e-be7c-e720ce730bb7",
+  "fields": {
+    "title": "Seven Worlds One Planet Best Of",
+    "slug": "seven-worlds-one-planet-best-of",
+    "description": "The most spectacular moments from the Seven Worlds, One Planet series that highlights the incredible rich and wonderful diversity of life found on our planet's seven unique continents. Millions of years ago incredible forces ripped apart the Earth's crust creating our seven continents - each with its own distinct climate, its own distinct terrain and its own unique animal life. Narrated by David Attenborough.",
+    "year": "2019",
+    "duration": 58,
+    "created": "2020-05-26",
+    "updated": "2020-05-26",
+    "tags": [
+      "0012cc77-c87a-468a-adda-e26443c833be"
+    ]
+  }
+},
+{
+  "model": "documentaries.documentary",
+  "pk": "0006c9d2-572a-499c-ad9b-963e968a2b15",
+  "fields": {
+    "title": "The Naked Truth",
+    "slug": "the-naked-truth",
+    "description": "",
+    "year": null,
+    "duration": null,
+    "created": "2020-05-26",
+    "updated": "2020-05-26",
+    "tags": [
+      "0008e42d-b67f-4732-a522-80ae797a7f74"
+    ]
+  }
+},
+{
+  "model": "documentaries.documentary",
+  "pk": "00141603-f103-4ea5-a9b1-d4883633ef8d",
+  "fields": {
+    "title": "Special Ops Ranger Killers - Military Documentary",
+    "slug": "special-ops-ranger-killers-military-documentary",
+    "description": "The 75th ranger regiment is a lethal and agile force. They are capable of executing myriad complex, joint special operations missions. They are Army units that are part of the Special Operations command. You might not see them in the headlines. But that is OK. They are the US Army\u2019s premier raid force. They are always combat ready, and their capabilities include air assault, direction action raids, seizing key terrain, and destroying strategic facilities. They do not allow cameras into their compound. But for the first time, Discovery got unprecedented access into their training facility. This documentary shows the RASP training course as 114 candidates enter the eight week program. Check what they go through.",
+    "year": null,
+    "duration": null,
+    "created": "2020-05-26",
+    "updated": "2020-05-26",
+    "tags": [
+      "002f4d00-6841-4f9d-b844-68008d883942"
+    ]
+  }
+},
+{
+  "model": "documentaries.documentary",
+  "pk": "0031791a-4578-4036-9811-363f8f2f33ba",
+  "fields": {
+    "title": "The Aswang Phenomenon: Filipino Vampires",
+    "slug": "the-aswang-phenomenon-filipino-vampires",
+    "description": "",
+    "year": null,
+    "duration": null,
+    "created": "2020-05-26",
+    "updated": "2020-05-26",
+    "tags": [
+      "00339825-9d15-4f56-88f0-426a0ff5eb4e"
+    ]
+  }
+},
+{
+  "model": "documentaries.documentary",
+  "pk": "004637a3-479e-4f21-afd8-a37835741d8c",
+  "fields": {
+    "title": "Meet the Romans: All Roads Lead to Rome",
+    "slug": "meet-the-romans-all-roads-lead-to-rome",
+    "description": "Professor Mary Beard looks beyond the stories of emperors, armies, guts and gore to meet the everyday people at the heart of Ancient Rome's vast empire. In this programme, Mary asks not what the Romans did for us, but what the empire did for Rome. She rides the Via Appia, climbs up to the top seats of the Colosseum, takes a boat to Rome's port Ostia and takes us into the bowels of Monte Testaccio. She also meets some extraordinary Romans: Eurysaces, an eccentric baker, who made a fortune out of the grain trade and built his tomb in the shape of a giant bread oven; Baricha, Zabda and Achiba, three prisoners of war who became Roman citizens; and Pupius Amicus, the purple dye seller making imperial dye from shellfish imported from Tunisia. This is Rome from the bottom up.",
+    "year": "2012",
+    "duration": 59,
+    "created": "2020-05-26",
+    "updated": "2020-05-26",
+    "tags": [
+      "0046ef38-4b95-416c-891a-567666e7c842"
+    ]
+  }
+}
+]
