@@ -5,6 +5,7 @@ class DocumentaryTestCase(TestCase):
     def setUp(self):
         # Crear instancias necesarias para correr los tests.
         # TODO:
+        # * Los tests son para los modelos.
         # 1. Probar lista de documentales.
         # 2. Probar detalle de un documental.
         # 3. Probar paginacion.
