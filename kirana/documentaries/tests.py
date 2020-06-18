@@ -3,17 +3,7 @@ from django.urls import resolve, reverse
 from . import views
 from .models import Tag, Documentary, Url
 
-# TODO:
-# * Los tests son para los modelos.
-# 1. Probar lista de documentales.
-# 2. Probar detalle de un documental.
-# 3. Probar paginacion.
-# 4. Busqueda de documentales.
-# 5. Filtrar documentales por etiqueta.
-# 6. Reportar enlace roto.
-
 class RedirectFromHomePageTestCase(TestCase):
-
     fixtures = ['tags', 'documentaries', 'urls']
 
     def setUp(self):
@@ -29,7 +19,6 @@ class RedirectFromHomePageTestCase(TestCase):
         self.assertEqual(self.url.visitors, visitors + 1)
 
 class DetailDocumentaryTestCase(TestCase):
-
     fixtures = ['tags', 'documentaries', 'urls']
 
     def test_detail_resolves(self):
