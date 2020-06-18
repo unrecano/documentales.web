@@ -11,8 +11,7 @@ def detail(request, slug):
 
 def redirect_url(request, id):
     url = get_object_or_404(Url, id=id)
-    url.visitors = url.visitors + 1
-    url.save()
+    url.add_visitor()
     return redirect(url.url)
 
 @require_POST

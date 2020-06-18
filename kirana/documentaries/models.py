@@ -1,5 +1,7 @@
 import uuid
 from django.contrib.postgres.fields import ArrayField
+from django.contrib.postgres.search import (SearchQuery, SearchRank,
+                                            SearchVector)
 from django.db import models
 
 class Tag(models.Model):
@@ -9,6 +11,16 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.value
+
+class DocumentaryManager(models.Manager):
+    def search(self, words):
+        vector = SearchVector('title', 'description')
+        query = SearchQuery(words[0])
+        for word in words[1:]:
+            query = query | SearchQuery(word)
+        rank = SearchRank(vector, query)
+        # Retornar documentales con coincidencias.
+        return self.annotate(rank=rank).filter(rank__gt=0.0).order_by('-rank')
 
 class Documentary(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
@@ -21,6 +33,8 @@ class Documentary(models.Model):
     tags = models.ManyToManyField(Tag, related_name="documentaries")
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
+
+    objects = DocumentaryManager()
 
     class Meta:
         verbose_name_plural = 'Documentaries'
@@ -44,7 +58,11 @@ class Url(models.Model):
     documentary = models.ForeignKey(Documentary, on_delete=models.CASCADE, related_name="urls")
     visitors = models.PositiveIntegerField(default=0)
     created = models.DateField(auto_now_add=True)
-    updated = models.DateField(auto_now=True)    
+    updated = models.DateField(auto_now=True)
+
+    def add_visitor(self):
+        self.visitors = self.visitors + 1
+        self.save()
 
     def __str__(self):
         return self.url

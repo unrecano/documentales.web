@@ -1,5 +1,3 @@
-from django.contrib.postgres.search import (SearchQuery, SearchRank,
-                                            SearchVector)
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from documentaries.models import Documentary, Tag
@@ -15,15 +13,8 @@ def search(request):
         query_words = [word.strip() for word in words.split(' ') if word]
         # Guardar palabras.
         search = Search.objects.create(words=query_words)
-        vector = SearchVector('title', 'description')
-        query = SearchQuery(query_words[0])
-        for word in query_words[1:]:
-            query = query | SearchQuery(word)
-        rank = SearchRank(vector, query)
-        # Retornar documentales con coincidencias.
-        documentaries = Documentary.objects.annotate(rank=rank)\
-                                           .filter(rank__gt=0.0)\
-                                           .order_by('-rank')
+        # Retornar documentaries.
+        Documentary.objects.search(query_words)
         # Guardar resultados.
         search.documentaries.set(documentaries)
     elif query_tag:
