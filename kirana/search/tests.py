@@ -4,7 +4,6 @@ from documentaries.models import Documentary
 from . import views
 
 class HomePageTestCase(TestCase):
-
     fixtures = ['tags', 'documentaries', 'urls']
 
     def test_home_page_resolves(self):
