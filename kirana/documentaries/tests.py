@@ -21,7 +21,8 @@ class RedirectFromHomePageTestCase(TestCase):
 
     def test_redirect_resolves(self):
         view = resolve(reverse("redirect", args=[self.url.id]))
-        self.assertEqual(view.func.__name__, views.redirect_url.__name__)
+        self.assertEqual(view.func.__name__,
+            views.RedirectSiteView.as_view().__name__)
 
     def test_redirect_to_documentary(self):
         visitors = self.url.visitors

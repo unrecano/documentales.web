@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
+from django.views.generic.base import TemplateView, RedirectView
 from .models import Documentary, Url, Point
 
 def detail(request, slug):
@@ -9,10 +10,11 @@ def detail(request, slug):
     }
     return render(request, 'documentaries/detail.html', context)
 
-def redirect_url(request, id):
-    url = get_object_or_404(Url, id=id)
-    url.add_visitor()
-    return redirect(url.url)
+class RedirectSiteView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        url = get_object_or_404(Url, id=kwargs.get('id'))
+        url.add_visitor()
+        return url.url
 
 @require_POST
 def point(request):
@@ -24,5 +26,5 @@ def point(request):
     Point.objects.create(**data)
     return redirect(request.META.get('HTTP_REFERER'))
 
-def about(request):
-    return render(request, 'documentaries/about.html')
+class AboutView(TemplateView):
+    template = "documentaries/about.html"
