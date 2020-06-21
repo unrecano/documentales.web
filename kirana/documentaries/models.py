@@ -55,7 +55,8 @@ class Url(models.Model):
                           editable=False)
     site = models.CharField(max_length=255)
     url = models.URLField()
-    documentary = models.ForeignKey(Documentary, on_delete=models.CASCADE, related_name="urls")
+    documentary = models.ForeignKey(Documentary, on_delete=models.CASCADE,
+        related_name="urls")
     visitors = models.PositiveIntegerField(default=0)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
@@ -67,11 +68,12 @@ class Url(models.Model):
     def __str__(self):
         return self.url
 
-class Point(models.Model):
+class Report(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           editable=False)
     comment = models.TextField(null=True)
-    url = models.ForeignKey(Url, on_delete=models.CASCADE, related_name="points")
+    url = models.ForeignKey(Url, on_delete=models.CASCADE,
+        related_name="reports")
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

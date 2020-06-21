@@ -34,7 +34,7 @@
 </div>
 <div class="py-4">
   <a id="link" class="text-blue-500 font-bold" href="#" onclick="show_form(event)">Reportar enlace roto.</a>
-  <form id="report" class="w-full max-w-lg py-4 hidden" method="POST" action="{% url 'point' %}">
+  <form id="report" class="w-full max-w-lg py-4 hidden" method="POST" action="{% url 'report' %}">
     {% csrf_token %}
     <div class="grid grid-cols-1 gap-4">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">Enlace:</label>
