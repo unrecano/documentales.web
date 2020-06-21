@@ -8,7 +8,8 @@ class HomePageTestCase(TestCase):
 
     def test_home_page_resolves(self):
         view = resolve('/')
-        self.assertEqual(view.func.__name__, views.search.__name__)
+        self.assertEqual(view.func.__name__,
+            views.SearchDocumentaryView.as_view().__name__)
 
     def test_search_documentaries(self):
         words = ['world', 'ranger']
