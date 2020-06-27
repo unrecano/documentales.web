@@ -12,5 +12,5 @@ deploy:
 					&& git commit -am "deploy" \
 					&& git push heroku master -f \
 					&& heroku ps:scale web=1 \
-					&& heroku run python manage.py migrate
+					&& heroku run python manage.py migrate --app=$(heroku_app)
 	sudo rm -r ~/$(folder)
