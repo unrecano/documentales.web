@@ -3,7 +3,7 @@ services:
   kiranadb:
     image: postgres:11
     ports:
-      - "5432:5432"
+      - "54321:5432"
     environment:
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: kirana_db
@@ -21,8 +21,14 @@ services:
       - DATABASE_NAME=kirana_db
       - DATABASE_USER=postgres
       - DATABASE_PASS=secret
-      - SCRAPING_DB_HOST=host
-      - SCRAPING_DB_USER=admin
-      - SCRAPING_DB_PASS=pass
+    depends_on:
+      - kiranadb
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=unrecano@reque.club
+      - PGADMIN_DEFAULT_PASSWORD=secret
+    ports:
+      - "8080:80"
     depends_on:
       - kiranadb
