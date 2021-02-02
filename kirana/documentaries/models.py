@@ -41,22 +41,22 @@ class Documentary(models.Model):
 
     @property
     def sites(self):
-        return self.urls.count()
+        return self.sites.count()
 
     @property
     def views(self):
-        return sum([url.visitors for url in self.urls.all()])
+        return sum([site.visitors for site in self.sites.all()])
 
     def __str__(self):
         return self.title
 
-class Url(models.Model):
+class Site(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           editable=False)
-    site = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
     url = models.URLField()
     documentary = models.ForeignKey(Documentary, on_delete=models.CASCADE,
-        related_name="urls")
+        related_name="sites")
     visitors = models.PositiveIntegerField(default=0)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
@@ -72,9 +72,9 @@ class Report(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           editable=False)
     comment = models.TextField(null=True)
-    url = models.ForeignKey(Url, on_delete=models.CASCADE,
-        related_name="reports")
+    site = models.ForeignKey(Site, on_delete=models.CASCADE,
+        related_name="reports", null=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.url
+        return self.site

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Documentary, Report, Tag, Url
+from .models import Documentary, Report, Tag, Site
 
 class TagAdmin(admin.ModelAdmin):
     search_fields = ["value"]
@@ -11,18 +11,18 @@ class DocumentaryAdmin(admin.ModelAdmin):
     list_filter = ["year"]
     ordering = ["created"]
 
-class UrlAdmin(admin.ModelAdmin):
-    list_display = ["site", "url", "visitors"]
-    search_fields = ["site", "url"]
-    list_filter = ["site"]
+class SiteAdmin(admin.ModelAdmin):
+    list_display = ["name", "url", "visitors"]
+    search_fields = ["name", "url"]
+    list_filter = ["name"]
     ordering = ["created"]
 
 class ReportAdmin(admin.ModelAdmin):
-    list_display = ["url", "comment"]
+    list_display = ["site", "comment"]
     search_fields = ["comment"]
     ordering = ["created"]
 
 admin.site.register(Documentary, DocumentaryAdmin)
 admin.site.register(Tag, TagAdmin)
-admin.site.register(Url, UrlAdmin)
+admin.site.register(Site, SiteAdmin)
 admin.site.register(Report, ReportAdmin)

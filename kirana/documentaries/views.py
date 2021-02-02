@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.views import View
 from django.views.generic.base import TemplateView, RedirectView
 from django.views.generic.detail import DetailView
-from .models import Documentary, Url, Report
+from .models import Documentary, Site, Report
 
 class DocumentaryDetailView(DetailView):
     model = Documentary
@@ -12,7 +12,7 @@ class DocumentaryDetailView(DetailView):
 
 class ToSiteRedirectView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
-        url = get_object_or_404(Url, id=kwargs.get('id'))
+        url = get_object_or_404(Site, id=kwargs.get('id'))
         url.add_visitor()
         return url.url
 
@@ -22,7 +22,7 @@ class AboutView(TemplateView):
 
 class ReportDocumentaryView(View):
     def post(self, request, *args, **kwargs):
-        url = get_object_or_404(Url, id=request.POST.get('url'))
+        url = get_object_or_404(Site, id=request.POST.get('url'))
         data = {
             "url": url,
             "comment": request.POST.get('comment')
