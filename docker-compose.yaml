@@ -21,6 +21,7 @@ services:
       - DATABASE_NAME=kirana_db
       - DATABASE_USER=postgres
       - DATABASE_PASS=secret
+      - SECRET_KEY=e!g%dge-s5@d+v5n2&547u%yqpuzc%x@=e^e1pa#0b1uupa9am
     depends_on:
       - kiranadb
   pgadmin:
