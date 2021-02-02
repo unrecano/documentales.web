@@ -22,9 +22,10 @@ class AboutView(TemplateView):
 
 class ReportDocumentaryView(View):
     def post(self, request, *args, **kwargs):
-        url = get_object_or_404(Site, id=request.POST.get('url'))
+        print(request.POST.get('site'))
+        site = get_object_or_404(Site, id=request.POST.get('site'))
         data = {
-            "url": url,
+            "site": site,
             "comment": request.POST.get('comment')
         }
         Report.objects.create(**data)
