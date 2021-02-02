@@ -1,9 +1,5 @@
 from django.contrib import admin
-from .models import Documentary, Report, Tag, Site
-
-class TagAdmin(admin.ModelAdmin):
-    search_fields = ["value"]
-    ordering = ["value"]
+from .models import Documentary, Report, Site
 
 class DocumentaryAdmin(admin.ModelAdmin):
     list_display = ["title", "year", "duration", "sites", "views"]
@@ -23,6 +19,5 @@ class ReportAdmin(admin.ModelAdmin):
     ordering = ["created"]
 
 admin.site.register(Documentary, DocumentaryAdmin)
-admin.site.register(Tag, TagAdmin)
 admin.site.register(Site, SiteAdmin)
 admin.site.register(Report, ReportAdmin)

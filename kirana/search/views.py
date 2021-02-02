@@ -1,8 +1,8 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from django.views import View
-from documentaries.models import Documentary, Tag
-from search.models import Search
+from documentaries.models import Documentary
+# from search.models import Search
 
 class SearchDocumentaryView(View):
     def get(self, request, *args, **kwargs):
@@ -35,14 +35,13 @@ class SearchDocumentaryView(View):
         # Crear vector con palabras para buscar.
         query_words = [word.strip() for word in words.split(' ') if word]
         # Guardar palabras.
-        search = Search.objects.create(words=query_words)
+        # search = Search.objects.create(words=query_words)
         # Retornar documentaries.
         documentaries = Documentary.objects.search(query_words)
         # Guardar resultados.
-        search.documentaries.set(documentaries)
+        # search.documentaries.set(documentaries)
         return documentaries
 
     def __get_documentaries_with_tag(self, tag):
         # Buscar documentales que contengan la etiqueta.
-        obj = get_object_or_404(Tag, value=tag)
-        return Documentary.objects.filter(tags=obj)
+        return Documentary.objects.filter(tags__contains=[tag])

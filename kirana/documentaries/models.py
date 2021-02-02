@@ -4,14 +4,6 @@ from django.contrib.postgres.search import (SearchQuery, SearchRank,
                                             SearchVector)
 from django.db import models
 
-class Tag(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4,
-                          editable=False)
-    value = models.CharField(max_length=100, unique=True)
-
-    def __str__(self):
-        return self.value
-
 class DocumentaryManager(models.Manager):
     def search(self, words):
         vector = SearchVector('title', 'description')
@@ -30,7 +22,7 @@ class Documentary(models.Model):
     description = models.TextField()
     year = models.CharField(max_length=4, null=True)
     duration = models.PositiveIntegerField(null=True)
-    tags = models.ManyToManyField(Tag, related_name="documentaries")
+    tags = ArrayField(models.CharField(max_length=255, blank=True))
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
 
