@@ -1,26 +1,26 @@
 from django.test import TestCase
 from django.urls import resolve, reverse
 from . import views
-from .models import Tag, Documentary, Url
+from .models import Documentary, Site
 
 class RedirectFromHomePageTestCase(TestCase):
-    fixtures = ['tags', 'documentaries', 'urls']
+    fixtures = ['documentaries', 'sites']
 
     def setUp(self):
-        self.url = Url.objects.first()
+        self.site = Site.objects.first()
 
     def test_redirect_resolves(self):
-        view = resolve(reverse("redirect", args=[self.url.id]))
+        view = resolve(reverse("redirect", args=[self.site.id]))
         self.assertEqual(view.func.__name__,
             views.ToSiteRedirectView.as_view().__name__)
 
     def test_redirect_to_documentary(self):
-        visitors = self.url.visitors
-        self.url.add_visitor()
-        self.assertEqual(self.url.visitors, visitors + 1)
+        visitors = self.site.visitors
+        self.site.add_visitor()
+        self.assertEqual(self.site.visitors, visitors + 1)
 
 class DocumentaryDetailTestCase(TestCase):
-    fixtures = ['tags', 'documentaries', 'urls']
+    fixtures = ['documentaries', 'sites']
 
     def test_detail_resolves(self):
         documentary = Documentary.objects.first()
