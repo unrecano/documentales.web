@@ -10,7 +10,7 @@ Este proyecto se crea por la necesidad de practicar [WEB SCRAPING](https://es.wi
 - [Documentary Mania](https://www.documentarymania.com/)
 - [DocumentaryTube](http://www.documentarytube.com/)
 
-El código del scraping y el de este sitio están en  [gitlab](https://gitlab.com/unrecano/kirana-web) y [github](https://gitlab.com/unrecano/kirana-web).
+El código del scraping y el de este sitio están en  [gitlab](https://gitlab.com/unrecano/kirana-web) y [github](https://github.com/unrecano/kirana-web).
 
 Visita [Kirana](https://kiranaweb.herokuapp.com).
 
@@ -28,7 +28,3 @@ Sitios pendientes:
 - [Top Documentaries Films](https://topdocumentaryfilms.com)
 - [Watch Documentaries](https://watchdocumentaries.com)
 - [Documentary Area](http://www.documentaryarea.tv)
-
-Pendientes:
-
-- Usar scrapy.
