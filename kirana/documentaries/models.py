@@ -22,6 +22,7 @@ class Documentary(models.Model):
     description = models.TextField()
     year = models.CharField(max_length=4, null=True)
     duration = models.PositiveIntegerField(null=True)
+    tweeted = models.BooleanField(default=False)
     tags = ArrayField(models.CharField(max_length=255, blank=True))
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
