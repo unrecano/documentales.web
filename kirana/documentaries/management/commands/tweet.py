@@ -22,7 +22,7 @@ class Command(BaseCommand):
         )
         api = tweepy.API(auth)
 
-        documentaries = Documentary.objects.filter(tweeted=False).all()[:2]
+        documentaries = Documentary.objects.filter(tweeted=False).all()[:10]
         for documentary in documentaries:
             urls = "\n".join([s.url for s in documentary.sites.all()])
             tags = [f"#{t}" for t in documentary.tags]
