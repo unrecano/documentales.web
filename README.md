@@ -29,10 +29,6 @@ Sitios pendientes:
 - [Watch Documentaries](https://watchdocumentaries.com)
 - [Documentary Area](http://www.documentaryarea.tv)
 
-Sitios no habilitados (por ahora):
-
-- [Documentary Mania](http://www.documentarymania.com)
-
 Pendientes:
 
 - Usar scrapy.
