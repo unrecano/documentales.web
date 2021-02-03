@@ -8,12 +8,9 @@ class SearchDocumentaryView(View):
     def get(self, request, *args, **kwargs):
         # Obtener palabras por buscar.
         words = request.GET.get('query')
-        tag = request.GET.get('tag')
         documentaries = []
         if words:
             documentaries = self.__get_documentaries_in_search(words)
-        elif tag:
-            documentaries = self.__get_documentaries_with_tag(tag)
         else:
             # Retornar todos los documentales.
             documentaries = Documentary.objects.all()
