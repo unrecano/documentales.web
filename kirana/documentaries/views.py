@@ -12,7 +12,7 @@ class DocumentaryDetailView(DetailView):
         return 'documentaries/detail.html'
 
 class ToSiteRedirectView(RedirectView):
-    def get_redirect_url(self, *args, **kwargs):
+    def get_redirect_url(self, **kwargs):
         url = get_object_or_404(Site, id=kwargs.get('id'))
         url.add_visitor()
         return url.url
@@ -22,7 +22,7 @@ class AboutView(TemplateView):
         return "documentaries/about.html"
 
 class ReportDocumentaryView(View):
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         print(request.POST.get('site'))
         site = get_object_or_404(Site, id=request.POST.get('site'))
         data = {
@@ -33,7 +33,7 @@ class ReportDocumentaryView(View):
         return redirect(request.META.get('HTTP_REFERER'))
 
 class SearchDocumentaryView(View):
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         # Obtener palabras por buscar.
         words = request.GET.get('query')
         documentaries = []
@@ -51,22 +51,18 @@ class SearchDocumentaryView(View):
         }
         return render(request, 'documentaries/search.html', context)
 
-    def __get_documentaries_per_page(self, request, documentaries):
+    @classmethod
+    def __get_documentaries_per_page(cls, request, documentaries):
         paginator = Paginator(documentaries, 24)
         page = request.GET.get('page')
         return paginator.get_page(page)
 
-    def __get_documentaries_in_search(self, words):
+    @classmethod
+    def __get_documentaries_in_search(cls, words):
         # Crear vector con palabras para buscar.
         query_words = [word.strip() for word in words.split(' ') if word]
-        # Guardar palabras.
-        # search = Search.objects.create(words=query_words)
         # Retornar documentaries.
         documentaries = Documentary.objects.search(query_words)
         # Guardar resultados.
         # search.documentaries.set(documentaries)
         return documentaries
-
-    def __get_documentaries_with_tag(self, tag):
-        # Buscar documentales que contengan la etiqueta.
-        return Documentary.objects.filter(tags__contains=[tag])

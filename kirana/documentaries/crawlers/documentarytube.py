@@ -1,13 +1,13 @@
 from documentaries.crawlers.utils import get_html_from_url
 
-url_base = "http://www.documentarytube.com"
-site = "DocumentaryTube"
+URL_BASE = "http://www.documentarytube.com"
+SITE = "DocumentaryTube"
 
 def get_document():
     """
     Obtener documento html de página principal.
     """
-    return get_html_from_url(f'{url_base}/videos')
+    return get_html_from_url(f'{URL_BASE}/videos')
 
 def get_documentaries_in_page(url):
     """
@@ -37,13 +37,13 @@ def all_documentaries_documentarytube():
     element = document.find('ul', {"class": "pagination"})
     pages = [a.find('a') for a in element if a.find('a') != None]
     last_page = pages[-1].get('data-page')
-    all = []
+    _all = []
     for i in range(0, int(last_page) + 1):
-        url = f'{url_base}/videos?{paginator.format(i + 1)}'
+        url = f'{URL_BASE}/videos?{paginator.format(i + 1)}'
         documentaries = [get_url_documentary(documentary) \
                          for documentary in get_documentaries_in_page(url)]
-        all = all + documentaries
-    return all
+        _all = _all + documentaries
+    return _all
 
 def documentary_documentarytube(url):
     """
@@ -55,12 +55,12 @@ def documentary_documentarytube(url):
     main = html.find('div', {"class": "container mt35 mb35"})
     tags = html.find('li', {"class": "category"})
     text = ""
-    for p in main.find_all('p', {'class': 'MsoNoSpacing'}):
-        text = text + f' {p.text}'
+    for _p in main.find_all('p', {'class': 'MsoNoSpacing'}):
+        text = text + f' {_p.text}'
     return {
         "url": url,
         "title": main.find('h1').text.strip(),
         "description": text.strip(),
         "tags": [tag.text for tag in tags.find_all('a') if tag.text.strip()],
-        "site": site,
+        "site": SITE,
     }

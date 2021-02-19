@@ -41,7 +41,7 @@ class Documentary(models.Model):
         return sum([site.visitors for site in self.sites.all()])
 
     def __str__(self):
-        return self.title
+        return str(self.title)
 
 class Site(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
@@ -59,7 +59,7 @@ class Site(models.Model):
         self.save()
 
     def __str__(self):
-        return self.url
+        return str(self.url)
 
 class Report(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
@@ -70,4 +70,4 @@ class Report(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.site
+        return str(self.site)

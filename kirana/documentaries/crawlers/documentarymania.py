@@ -1,14 +1,14 @@
 import math
 from documentaries.crawlers.utils import get_html_from_url
 
-url_base = 'https://www.documentarymania.com'
-site = "Documentary Mania"
+URL_BASE = 'https://www.documentarymania.com'
+SITE = "Documentary Mania"
 
 def get_document():
     """
     Obtener documento html de página principal.
     """
-    return get_html_from_url(f'{url_base}/home.php')
+    return get_html_from_url(f'{URL_BASE}/home.php')
 
 def get_documentaries_in_page(url):
     """
@@ -51,13 +51,13 @@ def all_documentaries_documentarymania():
     document = get_document()
     pages = document.find('div', {'class': 'blog-pagenat-wthree'}).find_all('a')
     last_page = pages[-1].text
-    all = []
+    _all = []
     for i in range(0, int(last_page)):
-        url = f'{url_base}/home.php{paginator}{i}'
-        documentaries = [f'{url_base}/{get_url_documentary(documentary)}' \
+        url = f'{URL_BASE}/home.php{paginator}{i}'
+        documentaries = [f'{URL_BASE}/{get_url_documentary(documentary)}' \
                          for documentary in get_documentaries_in_page(url)]
-        all = all + documentaries
-    return all
+        _all = _all + documentaries
+    return _all
 
 def documentary_documentarymania(url):
     """
@@ -76,5 +76,5 @@ def documentary_documentarymania(url):
         "title": main.find('h3').text.strip(),
         "description": main.find('div', {'class': 'comments'}).text.strip(),
         "tags": [tag.text for tag in tags.find_all('a') if tag.text.strip()],
-        "site": site,
+        "site": SITE,
     }
