@@ -24,7 +24,7 @@ test:
 	cd compose && docker-compose run $(container) python manage.py test
 
 lint:
-	cd compose && docker-compose run $(container) pylint documentaries kirana
+	cd compose && docker-compose run $(container) pylint documentaries kirana --ignore=migrations
 
 requirements:
 	cd compose && docker-compose run $(container) pip freeze > ${PWD}/$(folder)/requirements.txt
