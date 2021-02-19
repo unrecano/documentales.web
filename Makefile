@@ -4,7 +4,7 @@ heroku_app = kiranaweb
 
 deploy:
 	cp -R $(folder) ~/
-	docker-compose run $(container) pip freeze > ~/$(folder)/requirements.txt
+	cd compose && docker-compose run $(container) pip freeze > ~/$(folder)/requirements.txt
 	cd ~/$(folder) && echo 'web: gunicorn kirana.wsgi --workers=2 --bind=0.0.0.0:$$PORT' > Procfile \
 					&& git init \
 					&& heroku git:remote -a $(heroku_app) \
@@ -16,12 +16,21 @@ deploy:
 	sudo rm -r ~/$(folder)
 
 init:
-	docker-compose build
-	docker-compose run $(container) python manage.py migrate
-	docker-compose run $(container) python manage.py loaddata documentaries sites
+	cd compose && docker-compose build
+	cd compose && docker-compose run $(container) python manage.py migrate
+	cd compose && docker-compose run $(container) python manage.py loaddata documentaries sites
 
 test:
-	docker-compose run $(container) python manage.py test
+	cd compose && docker-compose run $(container) python manage.py test
 
 lint:
-	docker-compose run $(container) pylint documentaries kirana
+	cd compose && docker-compose run $(container) pylint documentaries kirana
+
+requirements:
+	cd compose && docker-compose run $(container) pip freeze > ${PWD}/$(folder)/requirements.txt
+
+up:
+	cd compose && docker-compose up
+
+down:
+	cd compose && docker-compose down --remove-orphans
