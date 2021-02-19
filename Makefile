@@ -14,3 +14,14 @@ deploy:
 					&& heroku ps:scale web=1 \
 					&& heroku run python manage.py migrate --app=$(heroku_app)
 	sudo rm -r ~/$(folder)
+
+init:
+	docker-compose build
+	docker-compose run $(container) python manage.py migrate
+	docker-compose run $(container) python manage.py loaddata documentaries sites
+
+test:
+	docker-compose run $(container) python manage.py test
+
+lint:
+	docker-compose run $(container) pylint documentaries kirana
