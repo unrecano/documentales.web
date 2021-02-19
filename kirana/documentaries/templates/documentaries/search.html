@@ -24,6 +24,6 @@
   {% endfor %}
 </div>
 {% if documentaries|length > 0 %}
-{% include "search/paginator.html" with paginator=documentaries words=words %}
+{% include "documentaries/paginator.html" with paginator=documentaries words=words %}
 {% endif %}
 {% endblock %}

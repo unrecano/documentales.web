@@ -7,6 +7,5 @@ def get_html_from_url(url):
 
     url -- string.
     """
-    print(url)
     page = requests.get(url)
     return BeautifulSoup(page.content, 'lxml')

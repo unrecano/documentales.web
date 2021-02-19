@@ -39,3 +39,16 @@ class ReportDocumentaryTestCase(TestCase):
         view = resolve("/report/")
         self.assertEqual(view.func.__name__,
             views.ReportDocumentaryView.as_view().__name__)
+
+class HomePageTestCase(TestCase):
+    fixtures = ['documentaries', 'sites']
+
+    def test_home_page_resolves(self):
+        view = resolve('/')
+        self.assertEqual(view.func.__name__,
+            views.SearchDocumentaryView.as_view().__name__)
+
+    def test_search_documentaries(self):
+        words = ['world', 'ranger']
+        documentaries = Documentary.objects.search(words)
+        self.assertEqual(documentaries.count(), 2)
