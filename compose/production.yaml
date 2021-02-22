@@ -1,0 +1,12 @@
+version: '3'
+services:
+  kirana:
+    build:
+      context: ../kirana
+      dockerfile: ../docker/prod
+    volumes:
+      - ../kirana:/code
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
