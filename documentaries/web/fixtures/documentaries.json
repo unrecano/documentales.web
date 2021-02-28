@@ -1,6 +1,6 @@
 [
 {
-  "model": "documentaries.documentary",
+  "model": "web.documentary",
   "pk": "00009ee0-9799-482e-be7c-e720ce730bb7",
   "fields": {
     "title": "Seven Worlds One Planet Best Of",
@@ -16,7 +16,7 @@
   }
 },
 {
-  "model": "documentaries.documentary",
+  "model": "web.documentary",
   "pk": "0006c9d2-572a-499c-ad9b-963e968a2b15",
   "fields": {
     "title": "The Naked Truth",
@@ -32,7 +32,7 @@
   }
 },
 {
-  "model": "documentaries.documentary",
+  "model": "web.documentary",
   "pk": "00141603-f103-4ea5-a9b1-d4883633ef8d",
   "fields": {
     "title": "Special Ops Ranger Killers - Military Documentary",
@@ -48,7 +48,7 @@
   }
 },
 {
-  "model": "documentaries.documentary",
+  "model": "web.documentary",
   "pk": "0031791a-4578-4036-9811-363f8f2f33ba",
   "fields": {
     "title": "The Aswang Phenomenon: Filipino Vampires",
@@ -64,7 +64,7 @@
   }
 },
 {
-  "model": "documentaries.documentary",
+  "model": "web.documentary",
   "pk": "004637a3-479e-4f21-afd8-a37835741d8c",
   "fields": {
     "title": "Meet the Romans: All Roads Lead to Rome",

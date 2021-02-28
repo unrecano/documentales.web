@@ -1,6 +1,6 @@
 [
 {
-  "model": "documentaries.site",
+  "model": "web.site",
   "pk": "0004fcf4-9217-4730-89c1-455ecae16764",
   "fields": {
     "name": "Documentary Mania",
@@ -12,7 +12,7 @@
   }
 },
 {
-  "model": "documentaries.site",
+  "model": "web.site",
   "pk": "0015d88d-af99-49be-9e84-78cacdf6deda",
   "fields": {
     "name": "DocumentaryTube",
@@ -24,7 +24,7 @@
   }
 },
 {
-  "model": "documentaries.site",
+  "model": "web.site",
   "pk": "002663a7-1400-41b2-a53b-38ac8341c9c9",
   "fields": {
     "name": "DocumentaryTube",
@@ -36,7 +36,7 @@
   }
 },
 {
-  "model": "documentaries.site",
+  "model": "web.site",
   "pk": "00326b8f-5531-4e04-9288-648430f93269",
   "fields": {
     "name": "Documentary Mania",
@@ -48,7 +48,7 @@
   }
 },
 {
-  "model": "documentaries.site",
+  "model": "web.site",
   "pk": "004ce5d6-e104-44cc-8051-d487210142f4",
   "fields": {
     "name": "Documentary Mania",

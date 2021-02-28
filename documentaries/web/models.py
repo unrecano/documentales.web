@@ -1,7 +1,7 @@
 import uuid
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.postgres.search import (SearchQuery, SearchRank,
-                                            SearchVector)
+    SearchVector)
 from django.db import models
 
 class DocumentaryManager(models.Manager):

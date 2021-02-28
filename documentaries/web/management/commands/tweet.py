@@ -1,7 +1,7 @@
 import os
 import tweepy
 from django.core.management.base import BaseCommand, CommandError
-from documentaries.models import Documentary
+from web.models import Documentary
 
 class Command(BaseCommand):
     
@@ -29,7 +29,7 @@ class Command(BaseCommand):
             hashtags = " ".join(tags)
             tweet = f"""Have you see this documentary: '{documentary.title}'
 see it: {urls}
-{hashtags} #kirana #documentaries"""
+{hashtags} #documentaries"""
             self.stdout.write(self.style.SUCCESS(tweet[:280]))
             try:
                 api.update_status(tweet[:280])

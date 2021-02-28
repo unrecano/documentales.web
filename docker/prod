@@ -5,4 +5,4 @@ RUN pip install --upgrade pip && \
     pip install gunicorn
 COPY . .
 RUN pip install -r requirements.txt
-CMD ["gunicorn", "kirana.wsgi", "-w", "2", "-b", "0.0.0.0:8000"]
+CMD ["gunicorn", "documentaries.wsgi", "-w", "2", "-b", "0.0.0.0:8000"]

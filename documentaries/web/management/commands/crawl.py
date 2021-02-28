@@ -1,11 +1,11 @@
 import logging
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.text import slugify
-from documentaries.crawlers.documentarytube import \
+from web.crawlers.documentarytube import \
     (all_documentaries_documentarytube, documentary_documentarytube)
-from documentaries.crawlers.documentarymania import \
+from web.crawlers.documentarymania import \
     (all_documentaries_documentarymania, documentary_documentarymania)
-from documentaries.models import Documentary, Site
+from web.models import Documentary, Site
 
 logger = logging.getLogger('crawler')
 

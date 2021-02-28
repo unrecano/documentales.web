@@ -1,4 +1,4 @@
-"""kirana URL Configuration
+"""documentaries URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from documentaries.urls import urlpatterns as documentaries_urls
+from web.urls import urlpatterns as web_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ] \
-+ documentaries_urls
++ web_urls
