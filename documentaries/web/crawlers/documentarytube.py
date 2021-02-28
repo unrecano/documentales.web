@@ -1,4 +1,4 @@
-from documentaries.crawlers.utils import get_html_from_url
+from web.crawlers.utils import get_html_from_url
 
 URL_BASE = "http://www.documentarytube.com"
 SITE = "DocumentaryTube"

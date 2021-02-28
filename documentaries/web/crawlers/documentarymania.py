@@ -1,5 +1,5 @@
 import math
-from documentaries.crawlers.utils import get_html_from_url
+from web.crawlers.utils import get_html_from_url
 
 URL_BASE = 'https://www.documentarymania.com'
 SITE = "Documentary Mania"
