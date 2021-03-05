@@ -131,12 +131,31 @@ STATIC_URL = '/static/'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {
+            'format': "%(asctime)s | %(levelname)s | {module} | %(name)s | %(message)s",
+            'style': '{',
+        },
+    },
     'handlers': {
-        'file': {
+        'crawler': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, "application.log"),
+            'filename': os.path.join(BASE_DIR, "crawler.log"),
+            'formatter': 'simple',
         },
+        'search': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, "search.log"),
+            'formatter': 'simple',
+        },
+        'application': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, "application.log"),
+            'formatter': 'simple',
+        }
     },
     'loggers': {
         'crawler': {
