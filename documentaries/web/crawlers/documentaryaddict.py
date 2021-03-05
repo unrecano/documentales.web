@@ -1,7 +1,7 @@
 """
 Crawler for site: Documentary Addict
 """
-from web.crawlers.utils import get_html_from_url
+from .utils import get_html_from_url
 
 URL_BASE = "https://documentaryaddict.com"
 SITE = "Documentary Addict"

@@ -1,7 +1,7 @@
 """
 Crawler for Site: Documentarytube.
 """
-from web.crawlers.utils import get_html_from_url
+from .utils import get_html_from_url
 
 URL_BASE = "http://www.documentarytube.com"
 SITE = "DocumentaryTube"
@@ -12,13 +12,15 @@ def get_document():
     """
     return get_html_from_url(f'{URL_BASE}/videos')
 
-def get_documentaries_in_page(url):
+def get_documentaries_in_page(page):
     """
     Obtener listado de elementos con información de documentales de una
     página específica.
 
     url -- string.
     """
+    paginator = 'page={}&per-page=24'
+    url = f'{URL_BASE}/videos?{paginator.format(page + 1)}'
     document = get_html_from_url(url)
     return document.find('div', {'class': 'list-view'})\
                    .find_all('div', {'class': 'panel'})
@@ -35,16 +37,14 @@ def all_documentaries_documentarytube():
     """
     Retornar un array con todas las urls de los documentales del sitio.
     """
-    paginator = 'page={}&per-page=24'
     document = get_document()
     element = document.find('ul', {"class": "pagination"})
     pages = [a.find('a') for a in element if a.find('a') is not None]
     last_page = pages[-1].get('data-page')
     _all = []
     for i in range(0, int(last_page) + 1):
-        url = f'{URL_BASE}/videos?{paginator.format(i + 1)}'
         documentaries = [get_url_documentary(documentary) \
-                         for documentary in get_documentaries_in_page(url)]
+                         for documentary in get_documentaries_in_page(i)]
         _all = _all + documentaries
     return _all
 

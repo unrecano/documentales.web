@@ -2,7 +2,7 @@
 Crawler for Site: Documententarymania.
 """
 import math
-from web.crawlers.utils import get_html_from_url
+from .utils import get_html_from_url
 
 URL_BASE = 'https://www.documentarymania.com'
 SITE = "Documentary Mania"
@@ -13,13 +13,15 @@ def get_document():
     """
     return get_html_from_url(f'{URL_BASE}/home.php')
 
-def get_documentaries_in_page(url):
+def get_documentaries_in_page(page):
     """
     Obtener listado de elementos con información de documentales de una
     página específica.
 
     url -- string.
     """
+    paginator = '?pageNum_Recordset1='
+    url = f'{URL_BASE}/home.php{paginator}{page}'
     document = get_html_from_url(url)
     return document.find_all('div', {'class': 'wthree-news-left'})
 
@@ -53,15 +55,13 @@ def all_documentaries_documentarymania():
     """
     Retornar un array con todas las urls de los documentales del sitio.
     """
-    paginator = '?pageNum_Recordset1='
     document = get_document()
     pages = document.find('div', {'class': 'blog-pagenat-wthree'}).find_all('a')
     last_page = pages[-1].text
     _all = []
     for i in range(0, int(last_page)):
-        url = f'{URL_BASE}/home.php{paginator}{i}'
         documentaries = [f'{URL_BASE}/{get_url_documentary(documentary)}' \
-                         for documentary in get_documentaries_in_page(url)]
+                         for documentary in get_documentaries_in_page(i)]
         _all = _all + documentaries
     return _all
 
