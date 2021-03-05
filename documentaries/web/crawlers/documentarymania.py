@@ -1,3 +1,6 @@
+"""
+Crawler for Site: Documententarymania.
+"""
 import math
 from web.crawlers.utils import get_html_from_url
 
@@ -29,6 +32,9 @@ def get_url_documentary(element):
     return element.find('h2').find('a').get('href')
 
 def parse_duration(text):
+    """
+    Parse duration for documentary
+    """
     if not text:
         return text
     duration = text.split(':')

@@ -1,3 +1,6 @@
+"""
+Utils methods for crawlers.
+"""
 import requests
 from bs4 import BeautifulSoup
 

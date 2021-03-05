@@ -1,3 +1,6 @@
+"""
+Crawler for Site: Documentarytube.
+"""
 from web.crawlers.utils import get_html_from_url
 
 URL_BASE = "http://www.documentarytube.com"
@@ -35,7 +38,7 @@ def all_documentaries_documentarytube():
     paginator = 'page={}&per-page=24'
     document = get_document()
     element = document.find('ul', {"class": "pagination"})
-    pages = [a.find('a') for a in element if a.find('a') != None]
+    pages = [a.find('a') for a in element if a.find('a') is not None]
     last_page = pages[-1].get('data-page')
     _all = []
     for i in range(0, int(last_page) + 1):

@@ -1,3 +1,6 @@
+"""
+Models for documentaries project.
+"""
 import uuid
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.postgres.search import (SearchQuery, SearchRank,
@@ -5,7 +8,16 @@ from django.contrib.postgres.search import (SearchQuery, SearchRank,
 from django.db import models
 
 class DocumentaryManager(models.Manager):
+    """
+    Manager for custom queries.
+    """
     def search(self, words):
+        """
+        Full text search for documentaries and order by rank.
+
+        Parameters:
+        words - list.
+        """
         vector = SearchVector('title', 'description')
         query = SearchQuery(words[0])
         for word in words[1:]:
@@ -15,6 +27,9 @@ class DocumentaryManager(models.Manager):
         return self.annotate(rank=rank).filter(rank__gt=0.0).order_by('-rank')
 
 class Documentary(models.Model):
+    """
+    Documentary model.
+    """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           editable=False)
     title = models.CharField(max_length=255)
@@ -30,20 +45,32 @@ class Documentary(models.Model):
     objects = DocumentaryManager()
 
     class Meta:
+        """
+        Meta for Documentary model.
+        """
         verbose_name_plural = 'Documentaries'
 
     @property
     def sites(self):
+        """
+        Return number of sites.
+        """
         return self.sites.count()
 
     @property
     def views(self):
+        """
+        Return number of visitors.
+        """
         return sum([site.visitors for site in self.sites.all()])
 
     def __str__(self):
         return str(self.title)
 
 class Site(models.Model):
+    """
+    Site model.
+    """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           editable=False)
     name = models.CharField(max_length=255)
@@ -55,6 +82,9 @@ class Site(models.Model):
     updated = models.DateField(auto_now=True)
 
     def add_visitor(self):
+        """
+        Add a visitor.
+        """
         self.visitors = self.visitors + 1
         self.save()
 
@@ -62,6 +92,9 @@ class Site(models.Model):
         return str(self.url)
 
 class Report(models.Model):
+    """
+    Report Model.
+    """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           editable=False)
     comment = models.TextField(null=True)

@@ -1,3 +1,6 @@
+"""
+Urls for Documentary project.
+"""
 from django.urls import path
 from . import views
 
