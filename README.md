@@ -12,7 +12,7 @@ Este proyecto se crea por la necesidad de practicar [WEB SCRAPING](https://es.wi
 
 El código del scraping y el de este sitio están en  [gitlab](https://gitlab.com/unrecano/documentaries.web) y [github](https://github.com/unrecano/documentaries.web).
 
-Visita [Documentaries](https://Documentariesweb.herokuapp.com).
+Visita [Documentaries](http://documentaries.recano.club).
 
 ## Documentaries scraping
 
