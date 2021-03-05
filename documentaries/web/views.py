@@ -1,12 +1,15 @@
 """
 Views for Documentaries project.
 """
+import logging
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
 from django.views.generic.base import TemplateView, RedirectView
 from django.views.generic.detail import DetailView
 from .models import Documentary, Site, Report
+
+logger = logging.getLogger('search')
 
 class DocumentaryDetailView(DetailView):
     """
@@ -110,5 +113,6 @@ class SearchDocumentaryView(View):
         """
         # Crear vector con palabras para buscar.
         query_words = [word.strip() for word in words.split(' ') if word]
+        logger.info(words)
         # Retornar documentaries.
         return Documentary.objects.search(query_words)
