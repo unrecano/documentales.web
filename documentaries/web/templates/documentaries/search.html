@@ -12,20 +12,16 @@
               type="submit">buscar</button>      
     </div>
     <br>
-    <p class="text-gray-700 text-sm">Busca entre {{ total }} documentales.</p>
+    <p class="text-gray-700 font-mono text-sm">Busca entre {{ total }} documentales.</p>
   </form>
 </div>
 <h1 class="my-8 font-mono text-3xl font-bold text-blue-500">Documentales</h1>
 {% if words != "" %}
-<p class="text-gray-700 text-sm">Se encontraron {{ results }} coincidencias.</p>
+<p class="text-gray-700 font-mono text-sm">Se encontraron {{ results }} coincidencias.</p>
 {% endif %}
 <div class="my-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
   {% for documentary in documentaries %}
   {% include 'components/documentary.html' with documentary=documentary %}
-  {% empty %}
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 text-center">
-    <p class="text-gray-700 font-bold text-lg">No hay resultados.</p>
-  </div>
   {% endfor %}
 </div>
 {% if documentaries|length > 0 %}
