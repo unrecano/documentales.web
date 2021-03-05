@@ -2,7 +2,11 @@
   <div>
     {% if paginator.has_previous %}
     <span class="text-blue-500 font-bold">
-      <a href="{% url 'search' %}?query={{words}}&page={{paginator.previous_page_number}}">&#10094; </a>
+      {% if words == "" %}
+      <a href="{% url 'search' %}?page={{paginator.previous_page_number}}">&#10094; </a>
+      {% else %}
+      <a href="{% url 'search' %}?query={{words}}&page={{paginator.previous_page_number}}"> &#10095;</a>
+      {% endif %}
     </span>
     {% endif %}
     <span class="text-gray-700 font-bold">
@@ -10,7 +14,11 @@
     </span>
     {% if paginator.has_next %}
     <span class="text-blue-500 font-bold">
+      {% if words == "" %}
+      <a href="{% url 'search' %}?page={{paginator.next_page_number}}"> &#10095;</a>
+      {% else %}
       <a href="{% url 'search' %}?query={{words}}&page={{paginator.next_page_number}}"> &#10095;</a>
+      {% endif %}
     </span>
     {% endif %}
   </div>

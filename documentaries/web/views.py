@@ -83,6 +83,8 @@ class SearchDocumentaryView(View):
         # Retornar documentales y palabras por buscar.
         context = {
             "documentaries": elements,
+            "total": Documentary.objects.count(),
+            "results": documentaries.count(),
             "words": words if words else ''
         }
         return render(request, 'documentaries/search.html', context)

@@ -11,9 +11,14 @@
       <button class="flex-shring-0 bg-blue-500 hover:bg-blue-700 border-blue-500 hover:border-blue-700 text-sm border-4 text-white py-1 px-2 rounded"
               type="submit">buscar</button>      
     </div>
+    <br>
+    <p class="text-gray-700 text-sm">Busca entre {{ total }} documentales.</p>
   </form>
 </div>
 <h1 class="my-8 font-mono text-3xl font-bold text-blue-500">Documentales</h1>
+{% if words != "" %}
+<p class="text-gray-700 text-sm">Se encontraron {{ results }} coincidencias.</p>
+{% endif %}
 <div class="my-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
   {% for documentary in documentaries %}
   {% include 'components/documentary.html' with documentary=documentary %}
