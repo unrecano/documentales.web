@@ -150,17 +150,16 @@ LOGGING = {
             'filename': os.path.join(BASE_DIR, "search.log"),
             'formatter': 'simple',
         },
-        'application': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, "application.log"),
-            'formatter': 'simple',
-        }
     },
     'loggers': {
         'crawler': {
-            'handlers': ['file'],
+            'handlers': ['crawler'],
             'level': 'ERROR',
+            'propagate': True,
+        },
+        'search': {
+            'handlers': ['search'],
+            'level': 'INFO',
             'propagate': True,
         },
     },
