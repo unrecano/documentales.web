@@ -75,6 +75,7 @@ class Site(models.Model):
                           editable=False)
     name = models.CharField(max_length=255)
     url = models.URLField()
+    embedded = models.CharField(max_length=255, null=True, blank=True)
     documentary = models.ForeignKey(Documentary, on_delete=models.CASCADE,
         related_name="sites")
     visitors = models.PositiveIntegerField(default=0)

@@ -50,6 +50,7 @@ def documentary_documentaryheaven(url):
     url -- string.
     """
     html = get_html_from_url(url)
+    embedded = html.find("meta", {"itemprop": "embedUrl"}).get("content")
     main = html.find("section", {"id": "primary"}).find("article")
     title = main.find("h1").text
     year = main.find("meta", {"itemprop": "dateCreated"}).get("content")
@@ -61,6 +62,7 @@ def documentary_documentaryheaven(url):
         "site": SITE,
         "title": title,
         "year": year,
+        "embedded": embedded,
         "duration": duration,
         "tags": [t.text.strip() for t in tags],
         "description": " ".join([p.text.strip() for p in paragraphs])
