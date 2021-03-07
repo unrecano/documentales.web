@@ -1,12 +1,14 @@
 import logging
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.text import slugify
-from ...crawlers.documentarytube import \
-    (all_documentaries_documentarytube, documentary_documentarytube)
-from ...crawlers.documentarymania import \
-    (all_documentaries_documentarymania, documentary_documentarymania)
 from ...crawlers.documentaryaddict import \
     (all_documentaries_documentaryaddict, documentary_documentaryaddict)
+from ...crawlers.documentaryheaven import \
+    (all_documentaries_documentaryheaven, documentary_documentaryheaven)
+from ...crawlers.documentarymania import \
+    (all_documentaries_documentarymania, documentary_documentarymania)
+from ...crawlers.documentarytube import \
+    (all_documentaries_documentarytube, documentary_documentarytube)
 from ...models import Documentary, Site
 
 logger = logging.getLogger('crawler')
@@ -20,6 +22,8 @@ class Command(BaseCommand):
             help='DocumentaryMania')
         parser.add_argument('--documentaryaddict', action='store_true',
             help='DocumentaryAddict')
+        parser.add_argument('--documentaryheaven', action='store_true',
+            help='DocumentaryHeaven')
 
     def handle(self, *args, **options):
         if options.get('documentarytube'):
@@ -34,6 +38,10 @@ class Command(BaseCommand):
             documentaries = all_documentaries_documentaryaddict()
             self._save_documentaries(documentaries,
                 documentary_documentaryaddict)
+        elif options.get('documentaryheaven'):
+            documentaries = all_documentaries_documentaryheaven()
+            self._save_documentaries(documentaries,
+                documentary_documentaryheaven)
     
     def _get_tags(self, tags):
         return [slugify(tag.lower()) for tag in tags]
