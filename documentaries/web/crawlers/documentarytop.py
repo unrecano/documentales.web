@@ -48,14 +48,14 @@ def documentary_documentarytop(url):
     url -- string.
     """
     html = get_html_from_url(url)
-    main = html.find("main", {"role": "main"})
+    main = html.find("main", {"role": "main"}).find("article")
     title = main.find("h1").text
     year = main.find("meta", {"itemprop": "dateCreated"}).get("content") \
         if main.find("meta", {"itemprop": "dateCreated"}) else None
     duration = main.find("time").text.split(" ")[0] \
         if main.find("time") else None
     tags = main.find("div", {"class": "meta-bar meta-single"}).find_all("a")
-    paragraphs = main.find("div", {"class": "contentpic"}).find_all("p")
+    paragraphs = main.find("div", {"itemprop": "reviewBody"}).find_all("p")
     embedded = html.find("meta", {"itemprop": "embedUrl"}).get("content") \
         if html.find("meta", {"itemprop": "embedUrl"}) else None
     return {
