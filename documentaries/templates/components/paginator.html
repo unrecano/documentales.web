@@ -5,7 +5,7 @@
       {% if words == "" %}
       <a href="{% url 'search' %}?page={{paginator.previous_page_number}}">&#10094; </a>
       {% else %}
-      <a href="{% url 'search' %}?query={{words}}&page={{paginator.previous_page_number}}"> &#10095;</a>
+      <a href="{% url 'search' %}?query={{words}}&page={{paginator.previous_page_number}}">&#10094; </a>
       {% endif %}
     </span>
     {% endif %}
