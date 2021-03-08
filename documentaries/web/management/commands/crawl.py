@@ -7,6 +7,8 @@ from ...crawlers.documentaryheaven import \
     (all_documentaries_documentaryheaven, documentary_documentaryheaven)
 from ...crawlers.documentarymania import \
     (all_documentaries_documentarymania, documentary_documentarymania)
+from ...crawlers.documentarytop import \
+    (all_documentaries_documentarytop, documentary_documentarytop)
 from ...crawlers.documentarytube import \
     (all_documentaries_documentarytube, documentary_documentarytube)
 from ...models import Documentary, Site
@@ -22,8 +24,8 @@ class Command(BaseCommand):
             help='DocumentaryMania')
         parser.add_argument('--documentaryaddict', action='store_true',
             help='DocumentaryAddict')
-        parser.add_argument('--documentaryheaven', action='store_true',
-            help='DocumentaryHeaven')
+        parser.add_argument('--documentarytop', action='store_true',
+            help='Top Documentary Films')
 
     def handle(self, *args, **options):
         if options.get('documentarytube'):
@@ -42,6 +44,10 @@ class Command(BaseCommand):
             documentaries = all_documentaries_documentaryheaven()
             self._save_documentaries(documentaries,
                 documentary_documentaryheaven)
+        elif options.get('documentarytop'):
+            documentaries = all_documentaries_documentarytop()
+            self._save_documentaries(documentaries,
+                documentary_documentarytop)
     
     def _get_tags(self, tags):
         return [slugify(tag.lower()) for tag in tags]
