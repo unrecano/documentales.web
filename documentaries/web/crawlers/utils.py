@@ -6,13 +6,13 @@ from urllib import request
 import requests
 from bs4 import BeautifulSoup
 
-def get_html_from_url(url):
+def get_html_from_url(url, random_agent=False):
     """
     Retorna el html desde una url.
 
     url -- string.
     """
-    headers = {"user-agent": get_user_agent()}
+    headers = {"user-agent": get_user_agent()} if random_agent else {}
     page = requests.get(url, headers=headers)
     return BeautifulSoup(page.content, 'lxml')
 

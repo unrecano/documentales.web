@@ -53,10 +53,13 @@ def documentary_documentaryaddict(url):
     title = main.find("h1").text
     tags = main.find("span", {"class": "keywords"}).text.split(",")
     description = main.find("main", {"role": "main"}).text
+    embedded = html.find("meta", {"itemprop": "embedUrl"}).get("content") \
+        if html.find("meta", {"itemprop": "embedUrl"}) else None
     return {
         "url": url,
         "site": SITE,
         "title": title,
         "tags": [t.strip() for t in tags],
+        "embedded": embedded,
         "description": description.strip()
     }

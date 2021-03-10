@@ -67,7 +67,7 @@ class Command(BaseCommand):
                         if documentary.get('duration') else None,
                     "tags": self._get_tags(documentary.get('tags'))
                 }
-                obj, created = Documentary.objects.get_or_create(
+                obj, created = Documentary.objects.update_or_create(
                     slug=slug,
                     defaults=d_params
                 )
@@ -75,16 +75,20 @@ class Command(BaseCommand):
                     s_params = {
                         "url": documentary.get('url'),
                         "name": documentary.get('site'),
+                        "embedded": documentary.get("embedded"),
                         "documentary": obj
                     }
                     site = Site.objects.create(**s_params)
                     msg = f"{obj.title} - {site.url} (creado)"
                     self.stdout.write(self.style.SUCCESS(msg))
                 else:
-                    site, created = Site.objects.get_or_create(
+                    site, created = Site.objects.update_or_create(
                         name=documentary.get('site'),
                         url=documentary.get('url'),
-                        defaults={"documentary": obj}
+                        defaults={
+                            "documentary": obj,
+                            "embedded": documentary.get("embedded")
+                        }
                     )
                     msg = f"{obj.title} - {site.url} (actualizado)"
                     self.stdout.write(self.style.WARNING(msg))

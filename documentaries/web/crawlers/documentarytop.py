@@ -10,7 +10,7 @@ def get_document():
     """
     Obtener documento html de página principal.
     """
-    return get_html_from_url(f'{URL_BASE}/all')
+    return get_html_from_url(f'{URL_BASE}/all', True)
 
 def get_documentaries_in_page(page):
     """
@@ -20,7 +20,7 @@ def get_documentaries_in_page(page):
     url -- string.
     """
     url = f'{URL_BASE}/all/page/{page}/'
-    document = get_html_from_url(url)
+    document = get_html_from_url(url, True)
     return document.find_all('article', class_='module')
 
 def get_url_documentary(documentary):
@@ -47,7 +47,7 @@ def documentary_documentarytop(url):
 
     url -- string.
     """
-    html = get_html_from_url(url)
+    html = get_html_from_url(url, True)
     main = html.find("main", {"role": "main"}).find("article")
     title = main.find("h1").text
     year = main.find("meta", {"itemprop": "dateCreated"}).get("content") \

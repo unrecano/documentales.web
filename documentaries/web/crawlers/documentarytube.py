@@ -60,10 +60,13 @@ def documentary_documentarytube(url):
     text = ""
     for _p in main.find_all('p', {'class': 'MsoNoSpacing'}):
         text = text + f' {_p.text}'
+    embedded = main.find("iframe", {"id": "player"}).get("src") \
+        if main.find("iframe", {"id": "player"}) else None
     return {
         "url": url,
         "title": main.find('h1').text.strip(),
         "description": text.strip(),
         "tags": [tag.text for tag in tags.find_all('a') if tag.text.strip()],
         "site": SITE,
+        "embedded": embedded
     }
