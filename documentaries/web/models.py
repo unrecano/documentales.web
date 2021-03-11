@@ -4,7 +4,8 @@ Models for documentaries project.
 import uuid
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.postgres.search import (SearchQuery, SearchRank,
-    SearchVector)
+    SearchVector, SearchVectorField)
+from django.contrib.postgres.indexes import GinIndex
 from django.db import models
 
 class DocumentaryManager(models.Manager):
@@ -18,13 +19,13 @@ class DocumentaryManager(models.Manager):
         Parameters:
         words - list.
         """
-        vector = SearchVector('title', 'description')
-        query = SearchQuery(words[0])
-        for word in words[1:]:
+        query = SearchQuery(words.pop())
+        for word in words:
             query = query | SearchQuery(word)
-        rank = SearchRank(vector, query)
+        rank = SearchRank(models.F('search_vector'), query)
         # Retornar documentales con coincidencias.
-        return self.annotate(rank=rank).filter(rank__gt=0.0).order_by('-rank')
+        return self.annotate(rank=rank).filter(search_vector=query)\
+            .filter(rank__gt=0.0).order_by('-rank')
 
 class Documentary(models.Model):
     """
@@ -41,6 +42,7 @@ class Documentary(models.Model):
     tags = ArrayField(models.CharField(max_length=255, blank=True))
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
+    search_vector = SearchVectorField(null=True)
 
     objects = DocumentaryManager()
 
@@ -49,6 +51,11 @@ class Documentary(models.Model):
         Meta for Documentary model.
         """
         verbose_name_plural = 'Documentaries'
+        indexes = [GinIndex(fields=['search_vector'])]
+    
+    def save(self, *args, **kwargs):
+        self.search_vector = SearchVector('title', 'description')
+        super(Documentary, self).save(*args, **kwargs)
 
     @property
     def sites(self):
