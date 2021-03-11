@@ -16,10 +16,10 @@ requirements:
 	docker-compose -f compose/docker-compose.yaml run $(container) pip freeze > ${PWD}/$(folder)/requirements.txt
 
 up:
-	docker-compose -f compose/docker-compose.yaml up --remove-orphans
+	docker-compose -f compose/docker-compose.yaml up
 
 down:
-	docker-compose -f compose/docker-compose.yaml down --remove-orphans
+	docker-compose -f compose/docker-compose.yaml down
 
 ssh:
 	docker-compose -f compose/docker-compose.yaml run $(container) bash
