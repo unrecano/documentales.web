@@ -26,6 +26,8 @@ class Command(BaseCommand):
             help='DocumentaryAddict')
         parser.add_argument('--documentarytop', action='store_true',
             help='Top Documentary Films')
+        parser.add_argument('--documentaryheaven', action='store_true',
+            help='Documentary Heaven')
 
     def handle(self, *args, **options):
         if options.get('documentarytube'):
