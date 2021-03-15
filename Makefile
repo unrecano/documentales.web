@@ -10,7 +10,7 @@ test:
 	docker-compose -f compose/docker-compose.yaml run $(container) python manage.py test
 
 lint:
-	docker-compose -f compose/docker-compose.yaml run $(container) pylint documentaries web --ignore=migrations
+	docker-compose -f compose/docker-compose.yaml run $(container) pylint documentaries web --ignore=migrations --disable=duplicate-code
 
 requirements:
 	docker-compose -f compose/docker-compose.yaml run $(container) pip freeze > ${PWD}/$(folder)/requirements.txt

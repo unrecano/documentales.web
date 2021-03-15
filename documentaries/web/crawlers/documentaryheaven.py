@@ -32,15 +32,18 @@ def get_url_documentary(documentary):
     return documentary.find('h2').find("a").get('href')
 
 def all_documentaries_documentaryheaven():
+    """
+    Retornar un array con todas las urls de los documentales del sitio.
+    """
     document = get_document()
-    all = []
+    _all = []
     paginator = document.find("div", class_="numeric-nav").find_all("li")
-    pages = [e.find("a") for e in paginator if e.find("a") != None]
+    pages = [e.find("a") for e in paginator if e.find("a") is not None]
     for i in range(1, int(pages[-2].text) + 1):
         documentaries = [get_url_documentary(d) \
             for d in get_documentaries_in_page(i)]
-        all = all + documentaries
-    return all
+        _all = _all + documentaries
+    return _all
 
 def documentary_documentaryheaven(url):
     """

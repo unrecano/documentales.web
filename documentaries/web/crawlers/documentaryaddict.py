@@ -32,15 +32,17 @@ def get_url_documentary(documentary):
     return documentary.find('div', class_='caption').find('a').get('href')
 
 def all_documentaries_documentaryaddict():
+    """
+    Retornar un array con todas las urls de los documentales del sitio.
+    """
     document = get_document()
-    all = []
+    _all = []
     page = document.find("ul", {"class": "pagination"}).find_all("a")[-1]
     for i in range(1, int(page.get("href").split("=")[-1]) + 1):
         documentaries = [get_url_documentary(d) \
             for d in get_documentaries_in_page(i)]
-        all = all + documentaries
-    return all
-        
+        _all = _all + documentaries
+    return _all
 
 def documentary_documentaryaddict(url):
     """

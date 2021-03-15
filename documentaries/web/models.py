@@ -52,10 +52,13 @@ class Documentary(models.Model):
         """
         verbose_name_plural = 'Documentaries'
         indexes = [GinIndex(fields=['search_vector'])]
-    
+
     def save(self, *args, **kwargs):
+        """
+        Override save method for model.
+        """
         self.search_vector = SearchVector('title', 'description')
-        super(Documentary, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     @property
     def sites(self):
