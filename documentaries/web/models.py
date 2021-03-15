@@ -25,7 +25,7 @@ class DocumentaryManager(models.Manager):
         rank = SearchRank(models.F('search_vector'), query)
         # Retornar documentales con coincidencias.
         return self.annotate(rank=rank).filter(search_vector=query)\
-            .filter(rank__gt=0.0).order_by('-rank')
+            .filter(rank__gt=0.0).prefetch_related('sites').order_by('-rank')
 
 class Documentary(models.Model):
     """
@@ -51,7 +51,8 @@ class Documentary(models.Model):
         Meta for Documentary model.
         """
         verbose_name_plural = 'Documentaries'
-        indexes = [GinIndex(fields=['search_vector'])]
+        indexes = [GinIndex(fields=['search_vector']),
+            models.Index(fields=['slug'])]
 
     def save(self, *args, **kwargs):
         """

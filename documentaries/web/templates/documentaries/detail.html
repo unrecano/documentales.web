@@ -27,7 +27,7 @@
 <div class="py-4">
   <p class="text-blue-900 font-medium leading-none">sitios:</p>
   <ul class="py-4">    
-    {% for site in documentary.sites.all %}
+    {% for site in sites %}
     <li><p class="text-blue-900 font-semibold text-sm leading-none"><a target="blank" href="{% url 'redirect' site.id %}">&#8227; {{ site.name }}</a></p></li>
     {% endfor %}
   </ul>
@@ -39,7 +39,7 @@
     <div class="grid grid-cols-1 gap-4">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">Enlace:</label>
       <select name="site" class="block appareance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-        {% for site in documentary.sites.all %}
+        {% for site in sites %}
         <option value="{{ site.id }}">{{ site.name }}</option>
         {% endfor %}
       </select>

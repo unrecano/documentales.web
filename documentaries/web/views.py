@@ -15,13 +15,16 @@ class DocumentaryDetailView(DetailView):
     """
     Show a documentary.
     """
-    model = Documentary
+    queryset = Documentary.objects.all().prefetch_related('sites')
+    template_name = 'documentaries/detail.html'
 
-    def get_template_names(self):
+    def get_context_data(self, **kwargs):
         """
-        Return template for a documentary.
+        Return context for template.
         """
-        return 'documentaries/detail.html'
+        context = super().get_context_data(**kwargs)
+        context['sites'] = context['documentary'].sites.all()
+        return context
 
 class ToSiteRedirectView(RedirectView):
     """
@@ -80,7 +83,7 @@ class SearchDocumentaryView(View):
             documentaries = self.__get_documentaries_in_search(words)
         else:
             # Retornar todos los documentales.
-            documentaries = Documentary.objects.all()
+            documentaries = Documentary.objects.all().prefetch_related('sites')
         # Paginar el restultado.
         elements = self.__get_documentaries_per_page(request, documentaries)
         # Retornar documentales y palabras por buscar.
