@@ -18,6 +18,9 @@ requirements:
 up:
 	docker-compose -f compose/docker-compose.yaml up
 
+build:
+	docker-compose -f compose/docker-compose.yaml build
+
 down:
 	docker-compose -f compose/docker-compose.yaml down
 
