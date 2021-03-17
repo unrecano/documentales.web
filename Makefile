@@ -37,3 +37,6 @@ crawl:
 	docker-compose -f compose/docker-compose.yaml run $(container) python manage.py crawl --documentaryaddict
 	docker-compose -f compose/docker-compose.yaml run $(container) python manage.py crawl --documentarytop
 	docker-compose -f compose/docker-compose.yaml run $(container) python manage.py crawl --documentaryheaven
+
+loaddata:
+	docker-compose -f compose/docker-compose.yaml run $(container) python manage.py loaddata documentaries sites
