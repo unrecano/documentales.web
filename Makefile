@@ -11,7 +11,7 @@ test:
 	docker-compose -f $(compose-file) run $(container) python manage.py test
 
 lint:
-	docker-compose -f $(compose-file) run $(container) pylint documentaries web --ignore=migrations --disable=duplicate-code
+	docker-compose -f $(compose-file) run $(container) pylint documentaries web api --ignore=migrations --disable=duplicate-code
 
 requirements:
 	docker-compose -f $(compose-file) run $(container) pip freeze > ${PWD}/$(folder)/requirements.txt
@@ -41,3 +41,7 @@ crawl:
 
 loaddata:
 	docker-compose -f $(compose-file) run $(container) python manage.py loaddata documentaries sites
+
+install:
+	docker-compose -f $(compose-file) run $(container) bash -c "pip install $(package) && pip freeze > requirements.txt"
+	make build

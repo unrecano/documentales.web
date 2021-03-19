@@ -17,9 +17,10 @@ import debug_toolbar
 from django.contrib import admin
 from django.urls import path, include
 from web.urls import urlpatterns as web_urls
+from api.urls import urlpatterns as api_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
 ] \
-+ web_urls
++ web_urls + api_urls
