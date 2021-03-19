@@ -1,42 +1,43 @@
 container = documentaries
 folder = documentaries
+compose-file = compose/docker-compose.yaml
 
 init:
-	docker-compose -f compose/docker-compose.yaml build
+	docker-compose -f $(compose-file) build
 	make migrate
 	make crawl
 
 test:
-	docker-compose -f compose/docker-compose.yaml run $(container) python manage.py test
+	docker-compose -f $(compose-file) run $(container) python manage.py test
 
 lint:
-	docker-compose -f compose/docker-compose.yaml run $(container) pylint documentaries web --ignore=migrations --disable=duplicate-code
+	docker-compose -f $(compose-file) run $(container) pylint documentaries web --ignore=migrations --disable=duplicate-code
 
 requirements:
-	docker-compose -f compose/docker-compose.yaml run $(container) pip freeze > ${PWD}/$(folder)/requirements.txt
+	docker-compose -f $(compose-file) run $(container) pip freeze > ${PWD}/$(folder)/requirements.txt
 
 up:
-	docker-compose -f compose/docker-compose.yaml up
+	docker-compose -f $(compose-file) up
 
 build:
-	docker-compose -f compose/docker-compose.yaml build
+	docker-compose -f $(compose-file) build
 
 down:
-	docker-compose -f compose/docker-compose.yaml down
+	docker-compose -f $(compose-file) down
 
 ssh:
-	docker-compose -f compose/docker-compose.yaml run $(container) bash
+	docker-compose -f $(compose-file) run $(container) bash
 
 migrate:
-	docker-compose -f compose/docker-compose.yaml run $(container) python manage.py makemigrations
-	docker-compose -f compose/docker-compose.yaml run $(container) python manage.py migrate
+	docker-compose -f $(compose-file) run $(container) python manage.py makemigrations
+	docker-compose -f $(compose-file) run $(container) python manage.py migrate
 
 crawl:
-	# docker-compose -f compose/docker-compose.yaml run $(container) python manage.py crawl --documentarymania
-	docker-compose -f compose/docker-compose.yaml run $(container) python manage.py crawl --documentarytube
-	docker-compose -f compose/docker-compose.yaml run $(container) python manage.py crawl --documentaryaddict
-	docker-compose -f compose/docker-compose.yaml run $(container) python manage.py crawl --documentarytop
-	docker-compose -f compose/docker-compose.yaml run $(container) python manage.py crawl --documentaryheaven
+	docker-compose -f $(compose-file) run $(container) python manage.py crawl --documentarymania
+	docker-compose -f $(compose-file) run $(container) python manage.py crawl --documentarytube
+	docker-compose -f $(compose-file) run $(container) python manage.py crawl --documentaryaddict
+	docker-compose -f $(compose-file) run $(container) python manage.py crawl --documentarytop
+	docker-compose -f $(compose-file) run $(container) python manage.py crawl --documentaryheaven
 
 loaddata:
-	docker-compose -f compose/docker-compose.yaml run $(container) python manage.py loaddata documentaries sites
+	docker-compose -f $(compose-file) run $(container) python manage.py loaddata documentaries sites
