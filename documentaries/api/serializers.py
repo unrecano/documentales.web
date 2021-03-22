@@ -2,9 +2,10 @@
 Serializers for documentaries api.
 """
 from rest_framework import serializers
+from django_restql.mixins import DynamicFieldsMixin
 from web.models import Documentary, Site
 
-class SiteSerializer(serializers.ModelSerializer):
+class SiteSerializer(DynamicFieldsMixin, serializers.ModelSerializer):
     """
     Serializer for model Site.
     """
@@ -12,7 +13,7 @@ class SiteSerializer(serializers.ModelSerializer):
         model = Site
         fields = ('name', 'url')
 
-class DocumentarySerializer(serializers.ModelSerializer):
+class DocumentarySerializer(DynamicFieldsMixin, serializers.ModelSerializer):
     """
     Serializer for model Documentary
     """
