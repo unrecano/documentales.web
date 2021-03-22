@@ -7,7 +7,7 @@ from . import views
 
 
 router = routers.DefaultRouter()
-router.register(r'documentaries', views.DocumentaryViewSet)
+router.register(r'documentaries', views.DocumentaryViewSet, basename="documentaries")
 
 urlpatterns = [
     path('api/', include(router.urls)),
